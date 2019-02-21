@@ -20,7 +20,7 @@ To disable this feature (primarily for local testing), set this variable to `1`.
 #### `STORJ_BRIDGE`
 
 This variable will change the default URI for the {@link BridgeClient} class.
-The default value is `https://api.storj.io`. If you run your own bridge,
+The default value is `https://api.internxt.com`. If you run your own bridge,
 testing one locally, or otherwise would like to default to a different host,
 set this variable.
 
