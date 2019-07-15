@@ -526,12 +526,12 @@ describe('FarmerInterface', function() {
   });
 
   describe('#_runSpaceCheck', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('will log with error message', function() {
       const check = sandbox.stub(diskusage, 'check')
-            .callsArgWith(1, new Error('test'));
+        .callsArgWith(1, new Error('test'));
 
       const logger = kad.Logger(0);
       const warn = sandbox.stub(logger, 'warn');
@@ -559,7 +559,7 @@ describe('FarmerInterface', function() {
         available: 100
       };
       const check = sandbox.stub(diskusage, 'check')
-            .callsArgWith(1, null, info);
+        .callsArgWith(1, null, info);
 
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
@@ -584,7 +584,7 @@ describe('FarmerInterface', function() {
         available: 1000 * 1024 * 1024
       };
       const check = sandbox.stub(diskusage, 'check')
-            .callsArgWith(1, null, info);
+        .callsArgWith(1, null, info);
 
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
@@ -635,7 +635,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#connectBridges', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('will call connect bridges, and setup interval', function(done) {
@@ -668,19 +668,18 @@ describe('FarmerInterface', function() {
         bridges: [
           {
             url: 'https://api.storj.io/',
-            extendedKey: extendedKey
+            extendedKey: extendedKey1
           },
           {
             url: 'https://api.eu.storj.io',
-            extendedKey: extendedKey
+            extendedKey: extendedKey2
           }
         ],
         storagePath: tmpPath,
         storageManager: new StorageManager(new RAMStorageAdapter())
       });
 
-      sandbox.stub(farmer, '_connectBridge').callsArg(1);
-      farmer.connectBridges();
+      var connectBridge = sandbox.stub(farmer, '_connectBridge').callsArg(1);
 
       let connected = 0;
 
@@ -689,14 +688,16 @@ describe('FarmerInterface', function() {
       });
 
       farmer.on('bridgesConnected', () => {
-        expect(farmer._connectBridge.callCount).to.equal(2);
+        expect(connectBridge.callCount).to.equal(2);
         expect(connected).to.equal(2);
       });
+
+      farmer.connectBridges();
     });
   });
 
   describe('#_connectBridge', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('will add bridge contact if contact does not exist', function(done) {
@@ -775,8 +776,8 @@ describe('FarmerInterface', function() {
         spaceAvailable: true,
         protocol: '1.2.0'
       };
-      sandbox.stub(farmer, 'bridgeRequest').callsArgWith(5, null, contact);
-      sandbox.stub(farmer, '_updateBridgeContact').callsArgWith(1, null);
+      var bridgeRequest = sandbox.stub(farmer, 'bridgeRequest').callsArgWith(5, null, contact);
+      var _updateBridgeContact = sandbox.stub(farmer, '_updateBridgeContact').callsArgWith(1, null);
       let bridge = {
         url: 'https://api.storj.io/',
         extendedKey: extendedKey
@@ -785,15 +786,15 @@ describe('FarmerInterface', function() {
         if (err) {
           return done(err);
         }
-        expect(farmer.bridgeRequest.callCount).to.equal(1);
-        expect(farmer._updateBridgeContact.callCount).to.equal(0);
+        expect(bridgeRequest.callCount).to.equal(1);
+        expect(_updateBridgeContact.callCount).to.equal(1);
         done();
       });
     });
   });
 
   describe('#_addBridgeContact', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('will get and complete challenge and create contact', function(done) {
@@ -833,13 +834,13 @@ describe('FarmerInterface', function() {
   });
 
   describe('#_updateBridgeContact', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('will send patch request to update contact', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
-        rpcPort: 11,
+        rpcPort: 11111,
         tunnelServerPort: 0,
         doNotTraverseNat: true,
         logger: kad.Logger(0),
@@ -858,7 +859,7 @@ describe('FarmerInterface', function() {
         }
         expect(farmer.bridgeRequest.callCount).to.equal(1);
         expect(farmer.bridgeRequest.args[0][4].address).to.equal('127.0.0.1');
-        expect(farmer.bridgeRequest.args[0][4].port).to.equal(11);
+        expect(farmer.bridgeRequest.args[0][4].port).to.equal(11111);
         done();
       });
     });
@@ -911,7 +912,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#bridgeRequest', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('will sign and send request with response', function(done) {
@@ -1361,7 +1362,7 @@ describe('FarmerInterface', function() {
 });
 
 describe('FarmerInterface#Negotiator', function() {
-  const sandbox = sinon.sandbox.create();
+  const sandbox = sinon.createSandbox();
   afterEach(() => sandbox.restore());
 
   it('should callback false if no bridges', function(done) {

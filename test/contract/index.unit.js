@@ -31,7 +31,7 @@ describe('Contract#fromJSON', function() {
 describe('Contract#fromBuffer', function() {
 
   it('should return an instance from the object', function() {
-    expect(Contract.fromBuffer(new Buffer('{}'))).to.be.instanceOf(Contract);
+    expect(Contract.fromBuffer(Buffer.from('{}'))).to.be.instanceOf(Contract);
   });
 
 });
@@ -39,8 +39,8 @@ describe('Contract#fromBuffer', function() {
 describe('Contract#compare', function() {
 
   it('should return true for the same contract', function() {
-    var c1 = Contract.fromBuffer(new Buffer('{}'));
-    var c2 = Contract.fromBuffer(new Buffer('{}'));
+    var c1 = Contract.fromBuffer(Buffer.from('{}'));
+    var c2 = Contract.fromBuffer(Buffer.from('{}'));
     expect(Contract.compare(c1, c2)).to.be.equal(true);
   });
 
@@ -209,7 +209,7 @@ describe('Contract (private)', function() {
       var seed = 'a0c42a9c3ac6abf2ba6a9946ae83af18f51bf1c9fa7dacc4c92513cc4d' +
           'd015834341c775dcd4c0fac73547c5662d81a9e9361a0aac604a73a321bd9103b' +
           'ce8af';
-      var masterKey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+      var masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
       var hdKey = masterKey.derive('m/3000\'/0\'');
       it('will validate with correct hd key and index', function() {
         var contract = Contract({

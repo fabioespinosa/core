@@ -5,7 +5,7 @@ var expect = require('chai').expect;
 var ExchangeReport = require('../lib/exchange-report');
 
 describe('Exchange Report', function() {
-  var sandbox = sinon.sandbox.create();
+  var sandbox = sinon.createSandbox();
   afterEach(function() {
     sandbox.restore();
   });

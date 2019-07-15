@@ -32,7 +32,7 @@ describe('RAMStorageAdapter', function() {
     it('should return a readable stream if shard exists', function(done) {
       var store = new RAMStorageAdapter();
       store._items.c527900223f9d08e0776d695f13a95cd6ac0e471 = {};
-      store._shards.c527900223f9d08e0776d695f13a95cd6ac0e471 = new Buffer(
+      store._shards.c527900223f9d08e0776d695f13a95cd6ac0e471 = Buffer.from(
         'hello ram store'
       );
       store._get(
@@ -48,7 +48,7 @@ describe('RAMStorageAdapter', function() {
     it('should expose a destroy method on the stream', function(done) {
       var store = new RAMStorageAdapter();
       store._items.c527900223f9d08e0776d695f13a95cd6ac0e471 = {};
-      store._shards.c527900223f9d08e0776d695f13a95cd6ac0e471 = new Buffer(
+      store._shards.c527900223f9d08e0776d695f13a95cd6ac0e471 = Buffer.from(
         'hello ram store'
       );
       store._get(

@@ -14,7 +14,7 @@ describe('StorageItem', function() {
       'd015834341c775dcd4c0fac73547c5662d81a9e9361a0aac604a73a321bd9103b' +
       'ce8af';
 
-  var masterKey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+  var masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
   var hdKey = masterKey.derive('m/3000\'/0\'');
   var nodeHdKey = hdKey.deriveChild(12);
   var keyPair = KeyPair(nodeHdKey.privateKey.toString('hex'));
@@ -271,7 +271,7 @@ describe('StorageItem', function() {
       });
       var item = new StorageItem();
       var audit = new AuditStream(6);
-      audit.end(Buffer('test'));
+      audit.end(Buffer.from('test'));
       setImmediate(function() {
         item.addAuditRecords(contact, audit);
         expect(
@@ -309,7 +309,7 @@ describe('StorageItem', function() {
         );
         done();
       });
-      auditstream.write(Buffer('test'));
+      auditstream.write(Buffer.from('test'));
       auditstream.end();
     });
 

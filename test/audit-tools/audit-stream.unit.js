@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const expect = require('chai').expect;
 const AuditStream = require('../../lib/audit-tools/audit-stream');
 
-const SHARD = new Buffer('testshard');
+const SHARD = Buffer.from('testshard');
 
 describe('AuditStream', function() {
 
@@ -33,11 +33,11 @@ describe('AuditStream', function() {
   });
 
   describe('#_generateTree', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('should generate the correct tree', function() {
-      const fauxChallenge = new Buffer(new Array(32));
+      const fauxChallenge = Buffer.from(new Array(32));
       sandbox.stub(AuditStream.prototype, '_generateChallenge')
         .returns(fauxChallenge);
 
@@ -57,7 +57,7 @@ describe('AuditStream', function() {
 
     it('should return double hash of data plus hex encoded shard', function() {
       var audit = new AuditStream(6);
-      var data = new Buffer('test').toString('hex');
+      var data = Buffer.from('test').toString('hex');
       var response = audit._createResponseInput(data);
       expect(response).to.be.instanceOf(crypto.Hash);
     });

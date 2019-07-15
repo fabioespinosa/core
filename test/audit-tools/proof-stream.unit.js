@@ -8,9 +8,9 @@ var sinon = require('sinon');
 
 describe('Proof', function() {
 
-  const CHALLENGE = new Buffer('d3ccb55d5c9bd56606bca0187ecf28699cb674fb7e243' +
-                               'fb4f180078735181686', 'hex');
-  const SHARD = new Buffer('testshard');
+  const CHALLENGE = Buffer.from('d3ccb55d5c9bd56606bca0187ecf28699cb674fb7e24' +
+                               '3fb4f180078735181686', 'hex');
+  const SHARD = Buffer.from('testshard');
 
   describe('@constructor', function() {
 
@@ -30,7 +30,7 @@ describe('Proof', function() {
         var leaves = proof._generateLeaves(Array(12));
         expect(leaves.length).to.equal(16);
         leaves.splice(12).forEach(function(leaf) {
-          expect(leaf).to.equal(utils.rmd160sha256b(''));
+          expect(leaf).to.eql(utils.rmd160sha256b(''));
         });
       });
     });
@@ -112,7 +112,7 @@ describe('Proof', function() {
           expect(_getChallengeResponse(result)).to.eql(
             utils.rmd160sha256b(utils.rmd160sha256b(
               Buffer.concat([Buffer.from(challenge, 'hex'), SHARD])
-          ))
+            ))
           );
           done();
         });

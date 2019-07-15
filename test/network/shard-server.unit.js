@@ -28,12 +28,12 @@ var seed = 'a0c42a9c3ac6abf2ba6a9946ae83af18f51bf1c9fa7dacc4c92513cc4d' +
     'd015834341c775dcd4c0fac73547c5662d81a9e9361a0aac604a73a321bd9103b' +
     'ce8af';
 
-var masterKey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+var masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
 var hdKey = masterKey.derive('m/3000\'/0\'');
 
 describe('ShardServer', function() {
   let server = null;
-  const sandbox = sinon.sandbox.create();
+  const sandbox = sinon.createSandbox();
   let tmpPath = '/tmp/storj-shard-server-test-' +
       crypto.randomBytes(4).toString('hex') + '/'
 
@@ -235,7 +235,7 @@ describe('ShardServer', function() {
   });
 
   describe('#routeConsignment', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('should send 401 if not authed', function(done) {
@@ -518,7 +518,7 @@ describe('ShardServer', function() {
         });
         server.routeConsignment(request, response);
         setTimeout(() => {
-          request.emit('data', Buffer('longer than 8 bytes'));
+          request.emit('data', Buffer.from('longer than 8 bytes'));
         }, 100);
       });
     });
@@ -592,7 +592,7 @@ describe('ShardServer', function() {
         });
         server.routeConsignment(request, response);
         setTimeout(() => {
-          request.emit('data', Buffer('olleh'));
+          request.emit('data', Buffer.from('olleh'));
           request.emit('end');
         }, 300);
       });
@@ -615,7 +615,6 @@ describe('ShardServer', function() {
           } else if (key === 'data_size') {
             return 5;
           }
-
         }
       }
       item.getContract = sinon.stub().returns(contract);
@@ -665,7 +664,7 @@ describe('ShardServer', function() {
         });
         server.routeConsignment(request, response);
         setTimeout(() => {
-          request.emit('data', Buffer('hello'));
+          request.emit('data', Buffer.from('hello'));
           request.emit('end');
         }, 300);
       });
@@ -879,7 +878,7 @@ describe('ShardServer', function() {
         });
         server.routeRetrieval(request, response);
         setTimeout(() => {
-          shard.push(new Buffer('hello'));
+          shard.push(Buffer.from('hello'));
           shard.push(null);
         }, 200);
       });

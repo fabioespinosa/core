@@ -25,7 +25,7 @@ var seed = 'a0c42a9c3ac6abf2ba6a9946ae83af18f51bf1c9fa7dacc4c92513cc4d' +
     'd015834341c775dcd4c0fac73547c5662d81a9e9361a0aac604a73a321bd9103b' +
     'ce8af';
 
-var masterKey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+var masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
 var hdKey = masterKey.derive('m/3000\'/0\'');
 var nodeHdKey = hdKey.deriveChild(10);
 
@@ -558,7 +558,7 @@ describe('Network (private)', function() {
   });
 
   describe('#_verifySignature', function() {
-    var sandbox = sinon.sandbox.create();
+    var sandbox = sinon.createSandbox();
     afterEach(function() {
       sandbox.restore();
     });
@@ -608,7 +608,7 @@ describe('Network (private)', function() {
       var verify = Network.prototype._verifySignature.bind({
         _pubkeys: {},
       });
-      sandbox.stub(secp256k1, 'recover').returns(new Buffer(pub, 'hex'));
+      sandbox.stub(secp256k1, 'recover').returns(Buffer.from(pub, 'hex'));
       var msg = {
         method: 'PING',
         id: '123456',
@@ -762,7 +762,7 @@ describe('Network (private)', function() {
   });
 
   describe('#_signMessage', function() {
-    var sandbox = sinon.sandbox.create();
+    var sandbox = sinon.createSandbox();
     afterEach(function() {
       sandbox.restore();
     });
@@ -805,7 +805,7 @@ describe('Network (private)', function() {
         'd015834341c775dcd4c0fac73547c5662d81a9e9361a0aac604a73a321bd9103b' +
         'ce8af';
 
-    var masterKey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+    var masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
     var hdKey = masterKey.derive('m/3000\'/0\'');
     var key2 = hdKey.deriveChild(12);
     var publicKey = key2.publicKey;
@@ -906,7 +906,7 @@ describe('Network (private)', function() {
       CLEANUP.push(net);
       var _acCallCount = 0;
       var _getSize = sinon.stub(net._tunnelers, 'getSize').returns(20);
-      var _addContact = sinon.stub(net._tunnelers, 'addContact', function() {
+      var _addContact = sinon.stub(net._tunnelers, 'addContact').callsFake(function() {
         _acCallCount++;
 
         if (_acCallCount === 1) {
@@ -923,7 +923,7 @@ describe('Network (private)', function() {
         protocol: version.protocol
       }));
       net.on('ready', function() {
-        var _subscribe = sinon.stub(net._pubsub, 'subscribe', function(t, cb) {
+        var _subscribe = sinon.stub(net._pubsub, 'subscribe').callsFake(function(t, cb) {
           if (t.indexOf('0e01') !== -1) {
             cb({
               address: '127.0.0.1',
@@ -961,7 +961,7 @@ describe('Network (private)', function() {
       CLEANUP.push(net);
       var _removeContact = sinon.stub(net._tunnelers, 'removeContact');
       net.on('ready', function() {
-        var _subscribe = sinon.stub(net._pubsub, 'subscribe', function(t, cb) {
+        var _subscribe = sinon.stub(net._pubsub, 'subscribe').callsFake(function(t, cb) {
           if (t.indexOf('0e00') !== -1) {
             cb({
               address: '127.0.0.1',
@@ -1141,7 +1141,7 @@ describe('Network (private)', function() {
   });
 
   describe('#_findTunnel', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('should callback error if no neighbors provided', function(done) {
@@ -1184,7 +1184,7 @@ describe('Network (private)', function() {
       );
       sandbox.stub(
         net,
-        '_establishTunnel',
+        '_establishTunnel').callsFake(
         function(tunnels, cb) {
           expect(tunnels).to.have.lengthOf(2);
           cb();
@@ -1209,7 +1209,7 @@ describe('Network (private)', function() {
       CLEANUP.push(net);
       sandbox.stub(
         net,
-        '_establishTunnel',
+        '_establishTunnel').callsFake(
         function(tunnels, cb) {
           expect(tunnels).to.have.lengthOf(1);
           cb();
@@ -1475,7 +1475,7 @@ describe('Network (private)', function() {
   });
 
   describe('#_enterOverlay', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('should use bridge to get seeds and error if fails', function(done) {

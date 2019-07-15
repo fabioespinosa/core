@@ -85,7 +85,7 @@ describe('KeyPair', function() {
 
       // recover the public key and check the signature
       var hash = Message(m).magicHash();
-      var sigbuf = new Buffer(signature, 'base64');
+      var sigbuf = Buffer.from(signature, 'base64');
       var sigobj = bitcore.crypto.Signature.fromCompact(sigbuf);
       var sigimp = secp256k1.signatureImport(sigobj.toBuffer());
       var pubkey = secp256k1.recover(hash, sigimp, sigobj.i, true);
@@ -105,7 +105,7 @@ describe('KeyPair', function() {
 
     it('should return a regular hex signature from buffer', function() {
       var keypair = new KeyPair(k);
-      var signature = keypair.sign(Buffer(m), { compact: false });
+      var signature = keypair.sign(Buffer.from(m), { compact: false });
       expect(signature).to.equal(
         '3045022100fc2cc9dcfa01fef0c8c78942f057f6d2930e9308bd5e43072c56098' +
         '34d938cad022007f1179aace5810c9c4ba0461980aa2bcdfac6a40a900443b018' +

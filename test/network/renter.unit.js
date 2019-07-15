@@ -306,7 +306,7 @@ describe('RenterInterface', function() {
         new Error('Send failed')
       );
       var audit = new AuditStream(1);
-      audit.end(Buffer('data'));
+      audit.end(Buffer.from('data'));
       setImmediate(function() {
         renter.getConsignmentPointer(Contact({
           address: '0.0.0.0',
@@ -336,7 +336,7 @@ describe('RenterInterface', function() {
         { error: { message: 'FAILED' } }
       );
       var audit = new AuditStream(1);
-      audit.end(Buffer('data'));
+      audit.end(Buffer.from('data'));
       setImmediate(function() {
         renter.getConsignmentPointer(Contact({
           address: '0.0.0.0',
@@ -366,7 +366,7 @@ describe('RenterInterface', function() {
         { result: { token: utils.rmd160('') } }
       );
       var audit = new AuditStream(1);
-      audit.end(Buffer('data'));
+      audit.end(Buffer.from('data'));
       setImmediate(function() {
         renter.getConsignmentPointer(Contact({
           address: '0.0.0.0',
@@ -469,7 +469,7 @@ describe('RenterInterface', function() {
   });
 
   describe('#getMirrorNodes', function() {
-    const sandbox = sinon.sandbox.create();
+    const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
     it('should callback error if all nodes fail (send error)', function(done) {

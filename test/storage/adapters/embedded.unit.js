@@ -24,7 +24,7 @@ var audit = new AuditStream(12);
 var contract = new Contract();
 var item = new StorageItem({
   hash: hash,
-  shard: new Buffer('test')
+  shard: Buffer.from('test')
 });
 
 describe('EmbeddedStorageAdapter', function() {
@@ -34,7 +34,7 @@ describe('EmbeddedStorageAdapter', function() {
       rimraf.sync(TMP_DIR);
     }
     mkdirp.sync(TMP_DIR);
-    audit.end(Buffer('test'));
+    audit.end(Buffer.from('test'));
     store = new EmbeddedStorageAdapter(tmpdir());
   });
 

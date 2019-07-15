@@ -118,8 +118,8 @@ describe('Manager', function() {
           }
         }), function() {
           adapter._shards = {
-            '7a728a8c27fa378cafbd300c1e38639362f87ee8': Buffer('test1'),
-            '4266db5cc0141c685194bc233c0989282a3e2340': Buffer('test2')
+            '7a728a8c27fa378cafbd300c1e38639362f87ee8': Buffer.from('test1'),
+            '4266db5cc0141c685194bc233c0989282a3e2340': Buffer.from('test2')
           };
           man.clean(function() {
             expect(Object.keys(adapter._shards)).to.have.lengthOf(1);
