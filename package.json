@@ -92,6 +92,7 @@
     "readable-stream": "^3.4.0",
     "request": "^2.88.0",
     "restify": "^8.3.3",
+    "restify-clients": "^2.6.6",
     "rimraf": "^2.6.3",
     "scrypt": "^6.0.3",
     "secp256k1": "^3.7.1",
