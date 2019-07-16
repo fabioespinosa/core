@@ -15,14 +15,14 @@ var EventEmitter = require('events').EventEmitter;
 describe('utils', function() {
 
   describe('#sha256', function() {
-    it('it will give digest as buffer', function() {
+    it('should give digest as buffer', function() {
       const digest = utils.sha256b('hello, world', 'utf8');
       expect(Buffer.isBuffer(digest)).to.equal(true);
       expect(digest.toString('hex'))
         .to.equal('09ca7e4eaa6e8ae9c7d261167129184883644d07dfba7cbfbc4c8a2e08' +
                   '360d5b');
     });
-    it('it will give digest as hex string', function() {
+    it('should give digest as hex string', function() {
       const digest = utils.sha256('hello, world', 'utf8');
       expect(digest).to.be.a('string');
       expect(digest)
@@ -32,14 +32,14 @@ describe('utils', function() {
   });
 
   describe('#rmd160', function() {
-    it('it will give digest as buffer', function() {
+    it('should give digest as buffer', function() {
       const digest = utils.rmd160b('hello, world', 'utf8');
       expect(Buffer.isBuffer(digest)).to.equal(true);
       expect(digest.toString('hex'))
         .to.equal('a3201f82fca034e46d10cd7b27e174976e241da2');
     });
 
-    it('it will give digest as hex string', function() {
+    it('should give digest as hex string', function() {
       const digest = utils.rmd160('hello, world', 'utf8');
       expect(digest).to.be.a('string');
       expect(digest)
@@ -48,14 +48,14 @@ describe('utils', function() {
   });
 
   describe('#rmd160sha256b', function() {
-    it('will give digest as buffer', function() {
+    it('should give digest as buffer', function() {
       const digest = utils.rmd160sha256b('hello, world', 'utf8');
       expect(Buffer.isBuffer(digest)).to.equal(true);
       expect(digest.toString('hex'))
         .to.equal('cf7c332804ab8ae1df7d7cbe7517b82edb83c680');
     });
 
-    it('will give digest as hex string', function() {
+    it('should give digest as hex string', function() {
       const digest = utils.rmd160sha256('hello, world', 'utf8');
       expect(digest).to.be.a('string');
       expect(digest)
@@ -162,27 +162,27 @@ describe('utils', function() {
   });
 
   describe('#isHexaString', function() {
-    it('returns false for object', function() {
+    it('should returns false for object', function() {
       expect(utils.isHexaString({})).to.equal(false);
     });
 
-    it('returns false for number', function() {
+    it('should returns false for number', function() {
       expect(utils.isHexaString(123456789)).to.equal(false);
     });
 
-    it('returns false for function', function() {
+    it('should returns false for function', function() {
       expect(utils.isHexaString(function(){})).to.equal(false);
     });
 
-    it('returns false for json string', function() {
+    it('should returns false for json string', function() {
       expect(utils.isHexaString('{"hello": "world"}')).to.equal(false);
     });
 
-    it('returns false for base64 string', function() {
+    it('should returns false for base64 string', function() {
       expect(utils.isHexaString('+rx4I0qmXs+I8TYn')).to.equal(false);
     });
 
-    it('returns false for any string with non-base16 characters', function() {
+    it('should returns false for any string with non-base16 characters', function() {
       [ 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
         'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@',
         '#', '$', '%', '^', '&', '*', '(', ')', 'G', 'H', 'I',
@@ -192,11 +192,11 @@ describe('utils', function() {
       });
     });
 
-    it('returns true for hexadecimal string (lowercase)', function() {
+    it('should returns true for hexadecimal string (lowercase)', function() {
       expect(utils.isHexaString('0123456789abcdef')).to.equal(true);
     });
 
-    it('returns true for hexadecimal string (uppercase)', function() {
+    it('should returns true for hexadecimal string (uppercase)', function() {
       expect(utils.isHexaString('0123456789ABCDEF')).to.equal(true);
     });
 
@@ -356,7 +356,7 @@ describe('utils', function() {
 
     it('should use STORJ_TEMP env if set', function() {
       process.env.STORJ_TEMP = '/path/to/temp';
-      var _existsSync = sinon.stub(utils, 'existsSync', function() {
+      var _existsSync = sinon.stub(utils, 'existsSync').callsFake(function() {
         return true;
       });
       expect(utils.tmpdir()).to.equal('/path/to/temp');
@@ -419,21 +419,21 @@ describe('utils', function() {
 
   describe('#isValidHDNodeKey', function() {
 
-    it('will return false for a number', function() {
+    it('should return false for a number', function() {
       expect(utils.isValidHDNodeKey(10000)).to.equal(false);
     });
 
-    it('will return false for object literal', function() {
+    it('should return false for object literal', function() {
       expect(utils.isValidHDNodeKey({})).to.equal(false);
     });
 
-    it('will return false for non-base58 characters', function() {
+    it('should return false for non-base58 characters', function() {
       var hdKey = 'xpub68Gmy5EdvgibQVfPdqkBBCHxA5htiqg55crXYuXoQRKfDBFA1WEjWg' +
           'P6LHhwBZeNK1VTsfTFUHCdrfp1bgwQ9xv5ski8PX9rL2dZXvgGDn0';
       expect(utils.isValidHDNodeKey(hdKey)).to.equal(false);
     });
 
-    it('will return true for extended public key string', function() {
+    it('should return true for extended public key string', function() {
       var hdKey = 'xpub68Gmy5EdvgibQVfPdqkBBCHxA5htiqg55crXYuXoQRKfDBFA1WEjWg' +
           'P6LHhwBZeNK1VTsfTFUHCdrfp1bgwQ9xv5ski8PX9rL2dZXvgGDnw';
       expect(utils.isValidHDNodeKey(hdKey)).to.equal(true);
@@ -442,23 +442,23 @@ describe('utils', function() {
 
   describe('#isValidNodeIndex', function() {
 
-    it('will return false for NaN', function() {
+    it('should return false for NaN', function() {
       expect(utils.isValidNodeIndex(NaN)).to.equal(false);
     });
 
-    it('will return false for Infinity', function() {
+    it('should return false for Infinity', function() {
       expect(utils.isValidNodeIndex(Infinity)).to.equal(false);
     });
 
-    it('will return false for number greater than 2 ^ 31 - 1', function() {
+    it('should return false for number greater than 2 ^ 31 - 1', function() {
       expect(utils.isValidNodeIndex(Math.pow(2, 31))).to.equal(false);
     });
 
-    it('will return false for number less than zero', function() {
+    it('should return false for number less than zero', function() {
       expect(utils.isValidNodeIndex(-10000)).to.equal(false);
     });
 
-    it('will return true for => 0 and <= 2 ^ 31 - 1', function() {
+    it('should return true for => 0 and <= 2 ^ 31 - 1', function() {
       expect(utils.isValidNodeIndex(Math.pow(2, 31) - 1)).to.equal(true);
     });
 

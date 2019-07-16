@@ -115,7 +115,7 @@ describe('Network/Transport', function() {
 
   describe('#_checkIfReachable', function() {
 
-    it('it should check the contact if address public', function(done) {
+    it('should check the contact if address public', function(done) {
       var emitter = new EventEmitter();
       emitter.end = sinon.stub();
       var _check = sinon.stub().returns(emitter);
@@ -134,7 +134,7 @@ describe('Network/Transport', function() {
       emitter.emit('connect');
     });
 
-    it('it should callback false if not reachable', function(done) {
+    it('should callback false if not reachable', function(done) {
       var emitter = new EventEmitter();
       emitter.destroy = sinon.stub();
       var _check = sinon.stub().returns(emitter);

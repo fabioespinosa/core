@@ -10,7 +10,7 @@ describe('Exchange Report', function() {
     sandbox.restore();
   });
 
-  it('#toObject', function() {
+  it('should #toObject', function() {
     var report = new ExchangeReport({
       dataHash: 'd8e33c898eb5ccd6789b32ceaca4e1d4e8cc452f',
       reporterId: '538db66de92c02dc52cde37307ace5463917cbf0',
@@ -36,7 +36,7 @@ describe('Exchange Report', function() {
   });
 
   describe('#begin/#end', function() {
-    it('it should record start and end time', function() {
+    it('should record start and end time', function() {
       var report = new ExchangeReport({
         reporterId: '538db66de92c02dc52cde37307ace5463917cbf0',
         farmerId: '41ff35b1fac9981685b4423f91acc11ec345cd36',

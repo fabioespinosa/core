@@ -211,19 +211,19 @@ describe('Contract (private)', function() {
           'ce8af';
       var masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
       var hdKey = masterKey.derive('m/3000\'/0\'');
-      it('will validate with correct hd key and index', function() {
+      it('should validate with correct hd key and index', function() {
         var contract = Contract({
           renter_hd_key: hdKey.publicExtendedKey,
           renter_hd_index: 12
         });
         expect(contract);
       });
-      it('will not validate with non-base58 hdkey', function() {
+      it('should not validate with non-base58 hdkey', function() {
         expect(function() {
           Contract({renter_hd_key: '0lI'});
         }).to.throw(Error);
       });
-      it('will not validate with negative hd index', function() {
+      it('should not validate with negative hd index', function() {
         expect(function() {
           Contract({
             renter_hd_key: hdKey.publicExtendedKey,
@@ -231,7 +231,7 @@ describe('Contract (private)', function() {
           });
         }).to.throw(Error);
       });
-      it('will not validate with hardened index', function() {
+      it('should not validate with hardened index', function() {
         expect(function() {
           Contract({
             renter_hd_key: hdKey.publicExtendedKey,
@@ -239,7 +239,7 @@ describe('Contract (private)', function() {
           });
         }).to.throw(Error);
       });
-      it('will not validate with floating point index', function() {
+      it('should not validate with floating point index', function() {
         expect(function() {
           Contract({
             renter_hd_key: hdKey.publicExtendedKey,

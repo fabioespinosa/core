@@ -13,11 +13,7 @@ const rimraf = require('rimraf');
 const RAMStorageAdapter = require('../../lib/storage/adapters/ram');
 const Manager = require('../../lib/storage/manager');
 const Logger = require('kad').Logger;
-const ShardServer = proxyquire('../../lib/network/shard-server', {
-  '../bridge-client': sinon.stub().returns({
-    createExchangeReport: sinon.stub()
-  })
-});
+const ShardServer = proxyquire('../../lib/network/shard-server', {});
 const httpMocks = require('node-mocks-http');
 const utils = require('../../lib/utils');
 const stream = require('readable-stream');

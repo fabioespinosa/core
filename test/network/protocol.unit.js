@@ -872,11 +872,7 @@ describe('Protocol', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    var Protocol = proxyquire('../../lib/network/protocol', {
-      '../bridge-client': sinon.stub().returns({
-        createExchangeReport: sinon.stub()
-      })
-    });
+    var Protocol = proxyquire('../../lib/network/protocol', {    });
 
     it('should error if it fails to load', function(done) {
       var proto = new Protocol({

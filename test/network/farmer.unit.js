@@ -102,7 +102,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#_mapBridges', function() {
-    it('it will create a map', function() {
+    it('should create a map', function() {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -129,7 +129,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#_connectBridges', function() {
-    it('it will cancel if already running', function() {
+    it('should cancel if already running', function() {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -143,7 +143,7 @@ describe('FarmerInterface', function() {
       farmer._connectBridges();
     });
 
-    it('will call connect if bridge is not connect', function(done) {
+    it('should call connect if bridge is not connect', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -529,7 +529,7 @@ describe('FarmerInterface', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    it('will log with error message', function() {
+    it('should log with error message', function() {
       const check = sandbox.stub(diskusage, 'check')
         .callsArgWith(1, new Error('test'));
 
@@ -554,7 +554,7 @@ describe('FarmerInterface', function() {
       expect(warn.args[1][1]).to.equal('test');
     });
 
-    it('will call noSpaceLeft with true', function() {
+    it('should call noSpaceLeft with true', function() {
       const info = {
         available: 100
       };
@@ -579,7 +579,7 @@ describe('FarmerInterface', function() {
       expect(farmer.noSpaceLeft.args[0][0]).to.equal(true);
     });
 
-    it('will call noSpaceLeft with false', function() {
+    it('should call noSpaceLeft with false', function() {
       const info = {
         available: 1000 * 1024 * 1024
       };
@@ -606,7 +606,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#noSpaceLeft', function() {
-    it('will set spaceAvailable to false bridges to disconnected', function() {
+    it('should set spaceAvailable to false bridges to disconnected', function() {
       let bridges = [{
         url: 'api.storj.io',
         extendedKey: extendedKey1
@@ -638,7 +638,7 @@ describe('FarmerInterface', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    it('will call connect bridges, and setup interval', function(done) {
+    it('should call connect bridges, and setup interval', function(done) {
       const clock = sandbox.useFakeTimers();
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
@@ -658,7 +658,7 @@ describe('FarmerInterface', function() {
       done();
     });
 
-    it('will connect each bridge', function() {
+    it('should connect each bridge', function() {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -700,7 +700,7 @@ describe('FarmerInterface', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    it('will add bridge contact if contact does not exist', function(done) {
+    it('should add bridge contact if contact does not exist', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -729,7 +729,7 @@ describe('FarmerInterface', function() {
         done();
       });
     });
-    it('will update contact if contact exists', function(done) {
+    it('should update contact if contact exists', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -759,7 +759,7 @@ describe('FarmerInterface', function() {
         done();
       });
     });
-    it('will do nothing if contact is up-to-date', function(done) {
+    it('should do nothing if contact is up-to-date', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -797,7 +797,7 @@ describe('FarmerInterface', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    it('will get and complete challenge and create contact', function(done) {
+    it('should get and complete challenge and create contact', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -837,7 +837,7 @@ describe('FarmerInterface', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    it('will send patch request to update contact', function(done) {
+    it('should send patch request to update contact', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 11111,
@@ -866,7 +866,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#_completeChallenge', function() {
-    it('will exec pow script and give back nonce', function(done) {
+    it('should exec pow script and give back nonce', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -889,7 +889,7 @@ describe('FarmerInterface', function() {
   });
 
   describe('#_getSigHash', function() {
-    it('will calculate the correct sighash', function() {
+    it('should calculate the correct sighash', function() {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -915,7 +915,7 @@ describe('FarmerInterface', function() {
     const sandbox = sinon.createSandbox();
     afterEach(() => sandbox.restore());
 
-    it('will sign and send request with response', function(done) {
+    it('should sign and send request with response', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
         rpcPort: 0,
@@ -1577,7 +1577,7 @@ describe('FarmerInterface#Negotiator', function() {
     });
   });
 
-  it('will return false if disk does not have any space available', function(done) {
+  it('should return false if disk does not have any space available', function(done) {
     let info = {
       available: 512000
     };

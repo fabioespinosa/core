@@ -410,7 +410,7 @@ describe('Network (private)', function() {
 
   describe('#_initKeyPair', function() {
 
-    it('it will derive keyPair and set hdKey and hdIndex', function() {
+    it('should derive keyPair and set hdKey and hdIndex', function() {
       var obj = {};
       var initKeyPair = Network.prototype._initKeyPair.bind(obj);
       initKeyPair({
@@ -422,7 +422,7 @@ describe('Network (private)', function() {
       expect(obj.keyPair).to.be.instanceOf(KeyPair);
     });
 
-    it('it will fail if given public extended key', function() {
+    it('should fail if given public extended key', function() {
       var obj = {};
       var initKeyPair = Network.prototype._initKeyPair.bind(obj);
       expect(function() {
@@ -433,7 +433,7 @@ describe('Network (private)', function() {
       }).to.throw(Error);
     });
 
-    it('it will set keyPair', function() {
+    it('should set keyPair', function() {
       var keyPair = new KeyPair();
       var obj = {};
       var initKeyPair = Network.prototype._initKeyPair.bind(obj);
@@ -810,7 +810,7 @@ describe('Network (private)', function() {
     var key2 = hdKey.deriveChild(12);
     var publicKey = key2.publicKey;
 
-    it('will return true if derived public key matches', function() {
+    it('should return true if derived public key matches', function() {
       var verify = Network.prototype._verifyHDKeyContact.bind({
         _hdcache: {}
       });
@@ -821,7 +821,7 @@ describe('Network (private)', function() {
       expect(verify(contact, publicKey)).to.equal(true);
     });
 
-    it('will return false if derived public key does not match', function() {
+    it('should return false if derived public key does not match', function() {
       var verify = Network.prototype._verifyHDKeyContact.bind({
         _hdcache: {}
       });
@@ -832,7 +832,7 @@ describe('Network (private)', function() {
       expect(verify(contact, publicKey)).to.equal(false);
     });
 
-    it('will return true if contact does nat have hd contact', function() {
+    it('should return true if contact does nat have hd contact', function() {
       var verify = Network.prototype._verifyHDKeyContact.bind({
         _hdcache: {}
       });
