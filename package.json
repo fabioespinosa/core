@@ -78,7 +78,7 @@
     "kad": "^1.6.4",
     "kad-logger-json": "^0.1.2",
     "kad-quasar": "^1.2.4",
-    "kfs": "github:storj/kfs#275bbfe87ab09efdad2042114fd398dbfd02eadb",
+    "kfs": "github:internxt/kfs",
     "knuth-shuffle": "^1.0.1",
     "leveldown": "^5.1.1",
     "levelup": "^4.1.0",
