@@ -266,7 +266,7 @@ describe('Contract (private)', function() {
         farmer_id: kp2.getNodeID(),
         payment_source: kp1.getAddress(),
         payment_destination: kp2.getAddress(),
-        data_hash: crypto.createHash('rmd160').update('test').digest('hex')
+        data_hash: crypto.createHash('ripemd160').update('test').digest('hex')
       });
       contract.sign('renter', kp1.getPrivateKey());
       contract.sign('farmer', kp2.getPrivateKey());

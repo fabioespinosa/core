@@ -182,7 +182,7 @@ describe('utils', function() {
       expect(utils.isHexaString('+rx4I0qmXs+I8TYn')).to.equal(false);
     });
 
-    it('should returns false for any string with non-base16 characters', function() {
+    it('should returns false for any string with non-base16 characters', () => {
       [ 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
         'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '@',
         '#', '$', '%', '^', '&', '*', '(', ')', 'G', 'H', 'I',

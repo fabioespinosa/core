@@ -906,6 +906,7 @@ describe('Network (private)', function() {
       CLEANUP.push(net);
       var _acCallCount = 0;
       var _getSize = sinon.stub(net._tunnelers, 'getSize').returns(20);
+      // eslint-disable-next-line max-len
       var _addContact = sinon.stub(net._tunnelers, 'addContact').callsFake(function() {
         _acCallCount++;
 
@@ -923,16 +924,17 @@ describe('Network (private)', function() {
         protocol: version.protocol
       }));
       net.on('ready', function() {
-        var _subscribe = sinon.stub(net._pubsub, 'subscribe').callsFake(function(t, cb) {
-          if (t.indexOf('0e01') !== -1) {
-            cb({
-              address: '127.0.0.1',
-              port: 1337,
-              nodeID: utils.rmd160('nodeid'),
-              protocol: version.protocol
-            }, '0e01');
-          }
-        });
+        var _subscribe = sinon.stub(net._pubsub, 'subscribe')
+          .callsFake(function(t, cb) {
+            if (t.indexOf('0e01') !== -1) {
+              cb({
+                address: '127.0.0.1',
+                port: 1337,
+                nodeID: utils.rmd160('nodeid'),
+                protocol: version.protocol
+              }, '0e01');
+            }
+          });
         net._listenForTunnelers();
         setImmediate(function() {
           _getSize.restore();
@@ -961,16 +963,17 @@ describe('Network (private)', function() {
       CLEANUP.push(net);
       var _removeContact = sinon.stub(net._tunnelers, 'removeContact');
       net.on('ready', function() {
-        var _subscribe = sinon.stub(net._pubsub, 'subscribe').callsFake(function(t, cb) {
-          if (t.indexOf('0e00') !== -1) {
-            cb({
-              address: '127.0.0.1',
-              port: 1337,
-              nodeID: utils.rmd160('nodeid'),
-              protocol: version.protocol
-            }, '0e00');
-          }
-        });
+        var _subscribe = sinon.stub(net._pubsub, 'subscribe')
+          .callsFake(function(t, cb) {
+            if (t.indexOf('0e00') !== -1) {
+              cb({
+                address: '127.0.0.1',
+                port: 1337,
+                nodeID: utils.rmd160('nodeid'),
+                protocol: version.protocol
+              }, '0e00');
+            }
+          });
         net._listenForTunnelers();
         setImmediate(function() {
           _removeContact.restore();
