@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "npm run testsuite && npm run linter",
-    "testsuite": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/mocha test/** --recursive",
+    "testsuite": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/mocha test/** --recursive --exit",
     "coverage": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive",
     "linter": "./node_modules/.bin/eslint ./index.js ./lib ./test",
     "build": "./node_modules/.bin/browserify index.js -s storj -o dist/storj.browser.js",
@@ -76,7 +76,6 @@
     "jsen": "github:bugventure/jsen#9e57a9d653ff4ea47d364fc37da0f1659bfb8e89",
     "json-stable-stringify": "^1.0.1",
     "kad": "^1.6.4",
-    "kad-logger-json": "^0.1.2",
     "kad-quasar": "^1.2.4",
     "kfs": "github:internxt/kfs",
     "knuth-shuffle": "^1.0.1",
@@ -92,12 +91,13 @@
     "readable-stream": "^3.4.0",
     "request": "^2.88.0",
     "restify": "^8.3.3",
-    "restify-clients": "^2.6.6",
+    "restify-clients": "^2.6.7",
     "rimraf": "^2.6.3",
     "scrypt": "^6.0.3",
     "secp256k1": "^3.7.1",
     "semver": "^6.2.0",
-    "through": "^2.3.8"
+    "through": "^2.3.8",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "benchmark": "^2.1.1",
