@@ -869,7 +869,8 @@ describe('ShardServer', function() {
         response.on('end', function() {
           expect(response.statusCode).to.equal(200);
           expect(server.farmerInterface.bridgeRequest.called).to.equal(true);
-          expect(response._getData().toString()).to.equal('hello');
+          // _getData() returns empty string, should be checked?
+          expect(response._getBuffer().toString()).to.equal('hello');
           done();
         });
         server.routeRetrieval(request, response);
