@@ -87,7 +87,7 @@
     "ms": "^0.7.1",
     "mtree": "^1.0.0",
     "nat-upnp": "^1.1.0",
-    "ntp-client": "bookchin/node-ntp-client#v0.5.5",
+    "ntp-client": "^0.5.3",
     "portfinder": "^1.0.3",
     "readable-stream": "^2.0.6",
     "request": "^2.83.0",
