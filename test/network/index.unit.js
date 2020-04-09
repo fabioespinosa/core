@@ -608,7 +608,7 @@ describe('Network (private)', function() {
       var verify = Network.prototype._verifySignature.bind({
         _pubkeys: {},
       });
-      sandbox.stub(secp256k1, 'recover').returns(new Buffer(pub, 'hex'));
+      sandbox.stub(secp256k1, 'ecdsaRecover').returns(new Buffer(pub, 'hex'));
       var msg = {
         method: 'PING',
         id: '123456',
@@ -637,7 +637,7 @@ describe('Network (private)', function() {
 
     it('should callback with error if secp256k1 throws', function(done) {
       var error = new Error('Something about points and curves...');
-      sandbox.stub(secp256k1, 'recover').throws(error);
+      sandbox.stub(secp256k1, 'ecdsaRecover').throws(error);
       var verify = Network.prototype._verifySignature.bind({
         _pubkeys: {}
       });
@@ -774,7 +774,7 @@ describe('Network (private)', function() {
         params: {}
       };
       var error = new Error('Something about points and curves...');
-      sandbox.stub(secp256k1, 'sign').throws(error);
+      sandbox.stub(secp256k1, 'ecdsaSign').throws(error);
       Network.prototype._signMessage.call({
         keyPair: KeyPair()
       }, msg, function(err) {

@@ -88,8 +88,8 @@ describe('KeyPair', function() {
       var sigbuf = new Buffer(signature, 'base64');
       var sigobj = bitcore.crypto.Signature.fromCompact(sigbuf);
       var sigimp = secp256k1.signatureImport(sigobj.toBuffer());
-      var pubkey = secp256k1.recover(hash, sigimp, sigobj.i, true);
-      var res = secp256k1.verify(hash, sigimp, pubkey);
+      var pubkey = secp256k1.ecdsaRecover(sigimp, sigobj.i, hash, true);
+      var res = secp256k1.ecdsaVerify(sigimp, hash, pubkey);
       expect(res).to.equal(true);
     });
 
