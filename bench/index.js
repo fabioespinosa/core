@@ -14,7 +14,7 @@ const RAMStorageAdapter = require('../lib/storage/adapters/ram');
 const seed = 'a0c42a9c3ac6abf2ba6a9946ae83af18f51bf1c9fa7dacc4c92513cc4d' +
     'd015834341c775dcd4c0fac73547c5662d81a9e9361a0aac604a73a321bd9103b' +
     'ce8af';
-const masterKey = HDKey.fromMasterSeed(new Buffer(seed, 'hex'));
+const masterKey = HDKey.fromMasterSeed(Buffer.from(seed, 'hex'));
 const hdKey = masterKey.derive('m/3000\'/0\'');
 const publicExtendedKey = hdKey.publicExtendedKey;
 const renterKey = storj.KeyPair(

@@ -66,10 +66,10 @@ describe('StorageMigration', function() {
         }), function() {
           source.get(utils.rmd160('item one'), function(err, item) {
             expect(err).to.equal(null);
-            item.shard.write(Buffer('item one'));
+            item.shard.write(Buffer.from('item one'));
             item.shard.end();
             source.get(utils.rmd160('item two'), function(err, item) {
-              item.shard.write(Buffer('item two'));
+              item.shard.write(Buffer.from('item two'));
               item.shard.end();
               done();
             });

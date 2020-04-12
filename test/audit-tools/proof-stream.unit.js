@@ -8,9 +8,9 @@ var sinon = require('sinon');
 
 describe('Proof', function() {
 
-  const CHALLENGE = new Buffer('d3ccb55d5c9bd56606bca0187ecf28699cb674fb7e243' +
+  const CHALLENGE = Buffer.from('d3ccb55d5c9bd56606bca0187ecf28699cb674fb7e243' +
                                'fb4f180078735181686', 'hex');
-  const SHARD = new Buffer('testshard');
+  const SHARD = Buffer.from('testshard');
 
   describe('@constructor', function() {
 

@@ -8,7 +8,7 @@ var utils = require('../../lib/utils');
 
 describe('Verification', function() {
 
-  var SHARD = new Buffer('testshard');
+  var SHARD = Buffer.from('testshard');
 
   describe('@constructor', function() {
 
