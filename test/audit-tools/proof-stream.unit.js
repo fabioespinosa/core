@@ -30,7 +30,7 @@ describe('Proof', function() {
         var leaves = proof._generateLeaves(Array(12));
         expect(leaves.length).to.equal(16);
         leaves.splice(12).forEach(function(leaf) {
-          expect(leaf).to.equal(utils.rmd160sha256b(''));
+          expect(leaf).to.eql(utils.rmd160sha256b(''));
         });
       });
     });
