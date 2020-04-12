@@ -9,9 +9,9 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "npm run testsuite && npm run linter",
-    "testsuite": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/mocha test/** --recursive",
-    "coverage": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --recursive",
+    "test": "npm run coverage && npm run linter",
+    "testsuite": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/mocha test/**/*.unit.js --recursive",
+    "coverage": "STORJ_ALLOW_LOOPBACK=1 ./node_modules/.bin/nyc ./node_modules/.bin/_mocha -- --recursive",
     "linter": "./node_modules/.bin/eslint ./index.js ./lib ./test",
     "build": "./node_modules/.bin/browserify index.js -s storj -o dist/storj.browser.js",
     "make-docs": "mkdir -p ./jsdoc && rm -r ./jsdoc && ./node_modules/.bin/jsdoc index.js lib -r -R README.md -u ./doc -c .jsdoc.json --verbose -d ./jsdoc && cp -r doc/assets jsdoc/assets",
@@ -106,11 +106,11 @@
     "eslint": "^3.14.0",
     "gh-pages": "^0.9.0",
     "ink-docstrap": "^1.3.2",
-    "istanbul": "^0.4.5",
     "jsdoc": "^3.4.0",
-    "mocha": "^2.2.4",
+    "mocha": "^7.1.1",
     "node-mocks-http": "^1.5.4",
     "noisegen": "^1.0.0",
+    "nyc": "^15.0.1",
     "proxyquire": "^1.7.3",
     "sinon": "^1.14.1"
   }
