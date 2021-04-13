@@ -839,7 +839,7 @@ describe('FarmerInterface', function() {
     it('will send patch request to update contact', function(done) {
       farmer = new FarmerInterface({
         keyPair: KeyPair(),
-        rpcPort: 11,
+        rpcPort: 11111,
         tunnelServerPort: 0,
         doNotTraverseNat: true,
         logger: kad.Logger(0),
@@ -858,7 +858,7 @@ describe('FarmerInterface', function() {
         }
         expect(farmer.bridgeRequest.callCount).to.equal(1);
         expect(farmer.bridgeRequest.args[0][4].address).to.equal('127.0.0.1');
-        expect(farmer.bridgeRequest.args[0][4].port).to.equal(11);
+        expect(farmer.bridgeRequest.args[0][4].port).to.equal(11111);
         done();
       });
     });
