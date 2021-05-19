@@ -64,7 +64,7 @@
   "dependencies": {
     "async": "^3.2.0",
     "bitcore-ecies": "JAlbertoGonzalez/bitcore-ecies",
-    "bitcore-lib": "=8.25.8",
+    "bitcore-lib": "=8.25.10",
     "bitcore-message": "JAlbertoGonzalez/bitcore-message",
     "diglet": "^1.0.6",
     "diskusage": "^0.2.4",
