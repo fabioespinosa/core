@@ -93,6 +93,7 @@
     "scrypt": "^6.0.3",
     "secp256k1": "^4.0.0",
     "semver": "^5.4.1",
+    "solid-bucket": "^2.1.1",
     "through": "^2.3.8"
   },
   "devDependencies": {
