@@ -687,6 +687,21 @@ aws-sdk@^2.284.1, aws-sdk@^2.382.0:
     uuid "3.3.2"
     xml2js "0.4.19"
 
+aws-sdk@^2.912.0:
+  version "2.912.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.912.0.tgz#3f096b057ccc7b22ca234b44167be5c02a1daab3"
+  integrity sha512-ImeMEC014AB9DMlS3X25G+y1Q/jGDwh7kOY+5AE0PBOMjDrQOYjfiqVYbFU2nZx57Uk7UVFclOb3Lty3hEz2gg==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -833,7 +848,7 @@ bitcore-ecies@JAlbertoGonzalez/bitcore-ecies:
   resolved "https://codeload.github.com/JAlbertoGonzalez/bitcore-ecies/tar.gz/2751e886b95d63e7051827e51d74a5e08abe742a"
   dependencies:
     aes "^0.1.0"
-    bitcore-lib "^8.14.4"
+    bitcore-lib "=8.25.10"
 
 bitcore-lib@=8.25.10, bitcore-lib@^8.14.4:
   version "8.25.10"
@@ -852,7 +867,7 @@ bitcore-message@JAlbertoGonzalez/bitcore-message:
   version "1.0.3"
   resolved "https://codeload.github.com/JAlbertoGonzalez/bitcore-message/tar.gz/35c62f8b849ffb7d58a028ddd12e54d3cf0bd7e7"
   dependencies:
-    bitcore-lib "^8.14.4"
+    bitcore-lib "=8.25.10"
 
 bl@^1.0.0:
   version "1.2.3"
