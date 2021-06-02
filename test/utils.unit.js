@@ -93,13 +93,13 @@ describe('utils', function() {
 
     it('should be compatible (different patch)', function() {
       expect(
-        utils.isCompatibleVersion(semver.inc(version.protocol, 'patch'))
+        utils.isCompatibleVersion(semver.inc(version.protocol, 'patch') + '-INXT')
       ).to.equal(true);
     });
 
     it('should be compatible (different minor)', function() {
       expect(
-        utils.isCompatibleVersion(semver.inc(version.protocol, 'minor'))
+        utils.isCompatibleVersion(semver.inc(version.protocol, 'minor') + '-INXT')
       ).to.equal(true);
     });
 
