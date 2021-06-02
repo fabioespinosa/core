@@ -26,7 +26,7 @@ const farmerKey = storj.KeyPair();
 const farmerID = farmerKey.getNodeID();
 const sourceAddress = renterKey.getAddress();
 const farmerAddress = farmerKey.getAddress();
-const dataHash = crypto.createHash('rmd160').update('test').digest('hex');
+const dataHash = crypto.createHash('ripemd160').update('test').digest('hex');
 
 // Increase the nonce expiration
 storj.constants.NONCE_EXPIRE = 1000000;
