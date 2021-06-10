@@ -34,7 +34,7 @@ describe('FarmerInterface', function() {
       crypto.randomBytes(4).toString('hex') + '/'
 
   beforeEach((done) => {
-    mkdirp(tmpPath, done);
+    mkdirp(tmpPath).then(() => done());
   });
 
   afterEach((done) => {

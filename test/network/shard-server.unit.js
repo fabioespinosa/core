@@ -38,7 +38,7 @@ describe('ShardServer', function() {
       crypto.randomBytes(4).toString('hex') + '/'
 
   beforeEach((done) => {
-    mkdirp(tmpPath, done);
+    mkdirp(tmpPath).then(() => done());
   });
 
   afterEach((done) => {
@@ -874,7 +874,7 @@ describe('ShardServer', function() {
         response.on('end', function() {
           expect(response.statusCode).to.equal(200);
           expect(server.farmerInterface.bridgeRequest.called).to.equal(true);
-          expect(response._getData().toString()).to.equal('hello');
+          expect(response._getBuffer().toString()).to.equal('hello');
           done();
         });
         server.routeRetrieval(request, response);
