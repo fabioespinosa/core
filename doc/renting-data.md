@@ -108,7 +108,7 @@ below is continued from inside the `tmpFile.on('finish', callback)` in the
 example above:
 
 ```
-var hash = utils.rmd160sha256(hasher.digest());
+var hash = utils.ripemd160sha256(hasher.digest());
 var contract = new storj.Contract({
   renter_id: keypair.getNodeID(),
   data_size: size,

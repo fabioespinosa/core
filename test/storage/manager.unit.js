@@ -36,7 +36,7 @@ describe('Manager', function() {
       var adapter = new RAMStorageAdapter();
       adapter.get = sinon.stub().callsArgWith(1, null, {});
       var man = new Manager(adapter);
-      man.load(utils.rmd160('key'), function(err) {
+      man.load(utils.ripemd160('key'), function(err) {
         expect(err.message).to.equal('Storage adapter provided invalid result');
         done();
       });
@@ -46,7 +46,7 @@ describe('Manager', function() {
       var adapter = new RAMStorageAdapter();
       adapter._get = sinon.stub().callsArgWith(1, new Error('Some error'));
       var man = new Manager(adapter);
-      man.load(utils.rmd160('key'), function(err) {
+      man.load(utils.ripemd160('key'), function(err) {
         expect(err.message).to.equal('Some error');
         done();
       });
@@ -56,7 +56,7 @@ describe('Manager', function() {
       var adapter = new RAMStorageAdapter();
       adapter._get = sinon.stub().callsArgWith(1, null, new StorageItem());
       var man = new Manager(adapter);
-      man.load(utils.rmd160('key'), function(err, item) {
+      man.load(utils.ripemd160('key'), function(err, item) {
         expect(item).to.be.instanceOf(StorageItem);
         done();
       });
@@ -140,7 +140,7 @@ describe('Manager', function() {
       var _put = sinon.stub(db, '_put').callsArgWith(2, new Error('Failed'));
       var _get = sinon.stub(db, 'get').callsArgWith(1, new Error('Failed'));
       man.save(StorageItem({
-        hash: utils.rmd160('hash')
+        hash: utils.ripemd160('hash')
       }), function(err) {
         _put.restore();
         _peek.restore();

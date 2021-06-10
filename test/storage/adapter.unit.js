@@ -24,7 +24,7 @@ describe('StorageAdapter', function() {
         1,
         new Error('Failed')
       );
-      adapter.del(utils.rmd160('key'), function(err) {
+      adapter.del(utils.ripemd160('key'), function(err) {
         _peek.restore();
         expect(err.message).to.equal('Failed');
         done();
@@ -41,7 +41,7 @@ describe('StorageAdapter', function() {
         1,
         new Error('Failed')
       );
-      adapter.del(utils.rmd160('key'), function(err) {
+      adapter.del(utils.ripemd160('key'), function(err) {
         _peek.restore();
         _del.restore();
         expect(err.message).to.equal('Failed');

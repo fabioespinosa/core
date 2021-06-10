@@ -458,7 +458,7 @@ describe('Network (private)', function() {
       _validateContact({
         address: '127.0.0.1',
         port: 0,
-        nodeID: utils.rmd160('nodeid'),
+        nodeID: utils.ripemd160('nodeid'),
         protocol: version.protocol
       }, function(err) {
         expect(err.message).to.equal('Invalid contact data supplied');
@@ -476,7 +476,7 @@ describe('Network (private)', function() {
       Network.prototype._validateContact.call({}, {
         address: '127.0.0.1',
         port: 80,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       }, function(err) {
         _isValidContact.restore();
         _isCompatibleVersion.restore();
@@ -548,7 +548,7 @@ describe('Network (private)', function() {
         protocol: version.protocol,
         address: '127.0.0.1',
         port: 6000,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       }, function(err) {
         expect(err).to.equal(undefined);
         done();
@@ -919,7 +919,7 @@ describe('Network (private)', function() {
       var _indexOf = sinon.stub(net._tunnelers, 'getContact').returns(Contact({
         address: '127.0.0.1',
         port: 1338,
-        nodeID: utils.rmd160('nodeid1'),
+        nodeID: utils.ripemd160('nodeid1'),
         protocol: version.protocol
       }));
       net.on('ready', function() {
@@ -928,7 +928,7 @@ describe('Network (private)', function() {
             cb({
               address: '127.0.0.1',
               port: 1337,
-              nodeID: utils.rmd160('nodeid'),
+              nodeID: utils.ripemd160('nodeid'),
               protocol: version.protocol
             }, '0e01');
           }
@@ -966,7 +966,7 @@ describe('Network (private)', function() {
             cb({
               address: '127.0.0.1',
               port: 1337,
-              nodeID: utils.rmd160('nodeid'),
+              nodeID: utils.ripemd160('nodeid'),
               protocol: version.protocol
             }, '0e00');
           }
@@ -1048,7 +1048,7 @@ describe('Network (private)', function() {
           {
             address: '127.0.0.1',
             port: 8080,
-            nodeID: utils.rmd160('nodeid')
+            nodeID: utils.ripemd160('nodeid')
           }
         ]
       );
@@ -1330,7 +1330,7 @@ describe('Network (private)', function() {
       net._establishTunnel([{
         address: '127.0.0.1',
         port: 1337,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }], function(err) {
         _send.restore();
         expect(err.message).to.equal(
@@ -1364,7 +1364,7 @@ describe('Network (private)', function() {
       net._establishTunnel([{
         address: '127.0.0.1',
         port: 1337,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }], function(err) {
         _addr.restore();
         _send.restore();
@@ -1414,7 +1414,7 @@ describe('Network (private)', function() {
       net._establishTunnel([{
         address: '127.0.0.1',
         port: 1337,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }], function() {
         _send.restore();
         setImmediate(function() {
@@ -1458,7 +1458,7 @@ describe('Network (private)', function() {
       net._establishTunnel([{
         address: '127.0.0.1',
         port: 1337,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }], function() {
         _send.restore();
         var _establishTunnel = sinon.stub(net, '_establishTunnel');
@@ -1525,7 +1525,7 @@ describe('Network (private)', function() {
         {
           address: '8.8.8.8',
           port: 1234,
-          nodeID: utils.rmd160('nodeid'),
+          nodeID: utils.ripemd160('nodeid'),
           protocol: VERSION.protocol
         }
       ]);
@@ -1566,9 +1566,9 @@ describe('Network (private)', function() {
         storageManager: Manager(RAMStorageAdapter()),
         logger: kad.Logger(0),
         seedList: [
-          'storj://127.0.0.1:1337/' + utils.rmd160('nodeid1'),
-          'storj://127.0.0.1:1338/' + utils.rmd160('nodeid2'),
-          'storj://127.0.0.1:1339/' + utils.rmd160('nodeid3')
+          'storj://127.0.0.1:1337/' + utils.ripemd160('nodeid1'),
+          'storj://127.0.0.1:1338/' + utils.ripemd160('nodeid2'),
+          'storj://127.0.0.1:1339/' + utils.ripemd160('nodeid3')
         ],
         bridgeUri: null,
         rpcAddress: '127.0.0.1',
@@ -1598,9 +1598,9 @@ describe('Network (private)', function() {
         storageManager: Manager(RAMStorageAdapter()),
         logger: kad.Logger(0),
         seedList: [
-          'storj://127.0.0.1:1337/' + utils.rmd160('nodeid1'),
-          'storj://127.0.0.1:1338/' + utils.rmd160('nodeid2'),
-          'storj://127.0.0.1:1339/' + utils.rmd160('nodeid3')
+          'storj://127.0.0.1:1337/' + utils.ripemd160('nodeid1'),
+          'storj://127.0.0.1:1338/' + utils.ripemd160('nodeid2'),
+          'storj://127.0.0.1:1339/' + utils.ripemd160('nodeid3')
         ],
         bridgeUri: null,
         rpcAddress: '127.0.0.1',
@@ -1627,9 +1627,9 @@ describe('Network (private)', function() {
         storageManager: Manager(RAMStorageAdapter()),
         logger: kad.Logger(0),
         seedList: [
-          'storj://127.0.0.1:1337/' + utils.rmd160('nodeid1'),
-          'storj://127.0.0.1:1338/' + utils.rmd160('nodeid2'),
-          'storj://127.0.0.1:1339/' + utils.rmd160('nodeid3')
+          'storj://127.0.0.1:1337/' + utils.ripemd160('nodeid1'),
+          'storj://127.0.0.1:1338/' + utils.ripemd160('nodeid2'),
+          'storj://127.0.0.1:1339/' + utils.ripemd160('nodeid3')
         ],
         bridgeUri: null,
         rpcAddress: '127.0.0.1',

@@ -295,7 +295,7 @@ describe('FarmerInterface', function() {
         _logger: { debug: sinon.stub() },
         _shouldSendOffer: _shouldSendOffer,
         _negotiateContract: _negotiateContract
-      }, { data_hash: utils.rmd160('') });
+      }, { data_hash: utils.ripemd160('') });
       _verify.restore();
       expect(_negotiateContract.called).to.equal(true);
       done();
@@ -318,8 +318,8 @@ describe('FarmerInterface', function() {
         renterWhitelist: null
       });
       farmer._negotiator(Contract({
-        data_hash: utils.rmd160(' some data'),
-        renter_id: utils.rmd160('nodeid'),
+        data_hash: utils.ripemd160(' some data'),
+        renter_id: utils.ripemd160('nodeid'),
         data_size: 100 * 1024 * 1024
       }), function(result) {
         expect(result).to.equal(false);
@@ -339,8 +339,8 @@ describe('FarmerInterface', function() {
         renterWhitelist: null
       });
       farmer._negotiator(Contract({
-        data_hash: utils.rmd160(' some data'),
-        renter_id: utils.rmd160('nodeid'),
+        data_hash: utils.ripemd160(' some data'),
+        renter_id: utils.ripemd160('nodeid'),
         data_size: 4294967296 + 1,
       }), function(result) {
         expect(result).to.equal(false);
@@ -364,7 +364,7 @@ describe('FarmerInterface', function() {
       });
       var _warn = sinon.stub(farmer._logger, 'warn');
       farmer._negotiateContract(Contract({
-        data_hash: utils.rmd160(' some data'),
+        data_hash: utils.ripemd160(' some data'),
         renter_id: null
       }));
       _warn.restore();
@@ -392,8 +392,8 @@ describe('FarmerInterface', function() {
         new Error('Save failed')
       );
       farmer._negotiateContract(Contract({
-        data_hash: utils.rmd160(' some data'),
-        renter_id: utils.rmd160('nodeid')
+        data_hash: utils.ripemd160(' some data'),
+        renter_id: utils.ripemd160('nodeid')
       }));
       _getContactByNodeID.restore();
       _save.restore();
@@ -426,8 +426,8 @@ describe('FarmerInterface', function() {
         new Error('Lookup failed')
       );
       farmer._negotiateContract(Contract({
-        data_hash: utils.rmd160('some data'),
-        renter_id: utils.rmd160('nodeid')
+        data_hash: utils.ripemd160('some data'),
+        renter_id: utils.ripemd160('nodeid')
       }));
       _save.restore();
       _getContactByNodeID.restore();
@@ -445,7 +445,7 @@ describe('FarmerInterface', function() {
         farmer_id: kp2.getNodeID(),
         payment_source: kp1.getAddress(),
         payment_destination: kp2.getAddress(),
-        data_hash: utils.rmd160('test')
+        data_hash: utils.ripemd160('test')
       });
       contract.sign('renter', kp1.getPrivateKey());
       contract.sign('farmer', kp2.getPrivateKey());
@@ -1149,13 +1149,13 @@ describe('FarmerInterface', function() {
       farmer._contractCount = Number.MAX_SAFE_INTEGER;
       farmer.handleAlloc({
         contract: Contract({
-          renter_id: utils.rmd160('nodeid'),
-          data_hash: utils.rmd160('')
+          renter_id: utils.ripemd160('nodeid'),
+          data_hash: utils.ripemd160('')
         }).toObject(),
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err) => {
         _verify.restore();
@@ -1185,7 +1185,7 @@ describe('FarmerInterface', function() {
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err) => {
         expect(err.message).to.equal('Invalid contract');
@@ -1206,13 +1206,13 @@ describe('FarmerInterface', function() {
       var _verify = sinon.stub(Contract.prototype, 'verify').returns(false);
       farmer.handleAlloc({
         contract: Contract({
-          renter_id: utils.rmd160('nodeid'),
-          data_hash: utils.rmd160('')
+          renter_id: utils.ripemd160('nodeid'),
+          data_hash: utils.ripemd160('')
         }).toObject(),
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err) => {
         _verify.restore();
@@ -1236,13 +1236,13 @@ describe('FarmerInterface', function() {
         sinon.stub(farmer, '_shouldSendOffer').callsArgWith(1, false);
       farmer.handleAlloc({
         contract: Contract({
-          renter_id: utils.rmd160('nodeid'),
-          data_hash: utils.rmd160('')
+          renter_id: utils.ripemd160('nodeid'),
+          data_hash: utils.ripemd160('')
         }).toObject(),
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err) => {
         _verify.restore();
@@ -1267,12 +1267,12 @@ describe('FarmerInterface', function() {
         sinon.stub(farmer, '_shouldSendOffer').callsArgWith(1, true);
       farmer.handleAlloc({
         contract: Contract({
-          data_hash: utils.rmd160('')
+          data_hash: utils.ripemd160('')
         }).toObject(),
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err) => {
         _verify.restore();
@@ -1301,13 +1301,13 @@ describe('FarmerInterface', function() {
       );
       farmer.handleAlloc({
         contract: Contract({
-          renter_id: utils.rmd160('nodeid'),
-          data_hash: utils.rmd160('')
+          renter_id: utils.ripemd160('nodeid'),
+          data_hash: utils.ripemd160('')
         }).toObject(),
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err) => {
         _verify.restore();
@@ -1336,13 +1336,13 @@ describe('FarmerInterface', function() {
       var _accept = sinon.stub(farmer.transport.shardServer, 'accept');
       farmer.handleAlloc({
         contract: Contract({
-          renter_id: utils.rmd160('nodeid'),
-          data_hash: utils.rmd160('')
+          renter_id: utils.ripemd160('nodeid'),
+          data_hash: utils.ripemd160('')
         }).toObject(),
         contact: {
           address: '127.0.0.1',
           port: 4001,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         }
       }, (err, result) => {
         _verify.restore();
@@ -1378,8 +1378,8 @@ describe('FarmerInterface#Negotiator', function() {
         }
       }
     }, new Contract({
-      data_hash: utils.rmd160(''),
-      renter_id: utils.rmd160('renter')
+      data_hash: utils.ripemd160(''),
+      renter_id: utils.ripemd160('renter')
     }), function(result) {
       expect(result).to.equal(false);
       done();
@@ -1422,7 +1422,7 @@ describe('FarmerInterface#Negotiator', function() {
         }
       }
     }, new Contract({
-      data_hash: utils.rmd160('')
+      data_hash: utils.ripemd160('')
     }), function(result) {
       expect(result).to.equal(false);
       done();
@@ -1444,7 +1444,7 @@ describe('FarmerInterface#Negotiator', function() {
       },
       storageManager: new StorageManager(new RAMStorageAdapter())
     }, new Contract({
-      data_hash: utils.rmd160('')
+      data_hash: utils.ripemd160('')
     }), function(result) {
       expect(result).to.equal(true);
       done();
@@ -1472,8 +1472,8 @@ describe('FarmerInterface#Negotiator', function() {
         })
       }
     }, new Contract({
-      data_hash: utils.rmd160(''),
-      renter_id: utils.rmd160('renter')
+      data_hash: utils.ripemd160(''),
+      renter_id: utils.ripemd160('renter')
     }), function(result) {
       expect(result).to.equal(true);
       done();
@@ -1502,7 +1502,7 @@ describe('FarmerInterface#Negotiator', function() {
         }
       }
     }, new Contract({
-      data_hash: utils.rmd160(''),
+      data_hash: utils.ripemd160(''),
       renter_id: '5ebef6c9f0cabf23c3565941e76fb6e5320143d3'
     }), function(result) {
       expect(result).to.equal(true);
@@ -1536,7 +1536,7 @@ describe('FarmerInterface#Negotiator', function() {
         }
       }
     }, new Contract({
-      data_hash: utils.rmd160(''),
+      data_hash: utils.ripemd160(''),
       renter_id: '5ebef6c9f0cabf23c3565941e76fb6e5320143d3',
       renter_hd_key: 'xpub6AHweYHAxk1EhJSBctQD1nLWPog6Sy2eTpKQLExR1hfzTyyZQ' +
         'WvU4EYNXv1NJN7GpLYXnDLt4PzN874g6zSjAQdFCHZN7U7nbYKYVDUzD42'
@@ -1568,7 +1568,7 @@ describe('FarmerInterface#Negotiator', function() {
         })
       }
     }, new Contract({
-      data_hash: utils.rmd160(''),
+      data_hash: utils.ripemd160(''),
       renter_id: '5ebef6c9f0cabf23c3565941e76fb6e5320143d3'
     }), function(result) {
       expect(result).to.equal(false);
@@ -1608,7 +1608,7 @@ describe('FarmerInterface#Negotiator', function() {
         }
       }
     }, new Contract({
-      data_hash: utils.rmd160(''),
+      data_hash: utils.ripemd160(''),
       data_size: 256000,
       renter_id: '5ebef6c9f0cabf23c3565941e76fb6e5320143d3',
       renter_hd_key: 'xpub6AHweYHAxk1EhJSBctQD1nLWPog6Sy2eTpKQLExR1hfzTyyZQ' +

@@ -756,7 +756,7 @@ describe('Protocol', function() {
         }
       });
       proto.handleRetrieve({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         contact: { nodeID: 'nodeid' }
       }, function(err) {
         expect(err.message).to.equal('Contract not found or not authorized');
@@ -795,7 +795,7 @@ describe('Protocol', function() {
         }
       });
       proto.handleRetrieve({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         contact: {}
       }, function(err) {
         expect(err).to.be.instanceOf(Error);
@@ -825,7 +825,7 @@ describe('Protocol', function() {
         }
       });
       proto.handleRetrieve({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         contact: { nodeID: 'nodeid' }
       }, function(err, result) {
         if (err) {
@@ -857,7 +857,7 @@ describe('Protocol', function() {
         }
       });
       proto.handleRetrieve({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         contact: { nodeID: 'nodeid' }
       }, function(err) {
         expect(err.message).to.equal('Shard data not found');
@@ -1068,7 +1068,7 @@ describe('Protocol', function() {
         farmer: {
           address: '0.0.0.0',
           port: 1234,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         },
         data_hash: 'hash'
       }, function(err) {
@@ -1138,7 +1138,7 @@ describe('Protocol', function() {
         farmer: {
           address: '0.0.0.0',
           port: 1234,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         },
         data_hash: 'hash'
       }, function(err) {
@@ -1208,7 +1208,7 @@ describe('Protocol', function() {
         farmer: {
           address: '0.0.0.0',
           port: 1234,
-          nodeID: utils.rmd160('')
+          nodeID: utils.ripemd160('')
         },
         data_hash: 'd7d5ee7824ff93f94c3055af9382c86c68b5ca92'
       }, function(err) {
@@ -1736,7 +1736,7 @@ describe('Protocol', function() {
       var renterKp = new KeyPair();
       var badKp = new KeyPair();
       var contract = new Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: renterKp.getNodeID()
       });
       contract.sign('renter', badKp.getPrivateKey());
@@ -1764,7 +1764,7 @@ describe('Protocol', function() {
       });
       var renterKp = new KeyPair();
       var contract = new Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: renterKp.getNodeID()
       });
       contract.sign('renter', renterKp.getPrivateKey());
@@ -1782,11 +1782,11 @@ describe('Protocol', function() {
     it('should fail if no contract for the original renter', function(done) {
       var renterKp = new KeyPair();
       var oldContract = new Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: renterKp.getNodeID()
       });
       oldContract.sign('renter', renterKp.getPrivateKey());
-      var item = new StorageItem({ hash: utils.rmd160('') });
+      var item = new StorageItem({ hash: utils.ripemd160('') });
       item.addContract({
         nodeID: 'adc83b19e793491b1c6ea0fd8b46cd9f32e592fc',
         hdKey: 'renter_hd_key'
@@ -1816,11 +1816,11 @@ describe('Protocol', function() {
     it('should fail if contract is modified illegally', function(done) {
       var renterKp = new KeyPair();
       var oldContract = new Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: renterKp.getNodeID()
       });
       oldContract.sign('renter', renterKp.getPrivateKey());
-      var item = new StorageItem({ hash: utils.rmd160('') });
+      var item = new StorageItem({ hash: utils.ripemd160('') });
       item.addContract({
         nodeID: renterKp.getNodeID(),
         hdKey: 'renter_hd_key'
@@ -1853,11 +1853,11 @@ describe('Protocol', function() {
     it('should fail if manager cannot save updated item', function(done) {
       var renterKp = new KeyPair();
       var oldContract = new Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: renterKp.getNodeID()
       });
       oldContract.sign('renter', renterKp.getPrivateKey());
-      var item = new StorageItem({ hash: utils.rmd160('') });
+      var item = new StorageItem({ hash: utils.ripemd160('') });
       item.addContract({
         nodeID: renterKp.getNodeID(),
         hdKey: 'renter_hd_key'
@@ -1890,12 +1890,12 @@ describe('Protocol', function() {
     it('should succeed with signed updated contract', function(done) {
       var renterKp = new KeyPair();
       var oldContract = new Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: renterKp.getNodeID()
       });
       var farmerKp = new KeyPair();
       oldContract.sign('renter', renterKp.getPrivateKey());
-      var item = new StorageItem({ hash: utils.rmd160('') });
+      var item = new StorageItem({ hash: utils.ripemd160('') });
       item.addContract({
         nodeID: renterKp.getNodeID(),
         hdKey: 'renter_hd_key'
