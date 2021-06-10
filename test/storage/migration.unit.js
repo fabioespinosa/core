@@ -59,16 +59,16 @@ describe('StorageMigration', function() {
       target = new EmbeddedStorageAdapter(_p('t6'));
 
       source.put(StorageItem({
-        hash: utils.rmd160('item one')
+        hash: utils.ripemd160('item one')
       }), function() {
         source.put(StorageItem({
-          hash: utils.rmd160('item two')
+          hash: utils.ripemd160('item two')
         }), function() {
-          source.get(utils.rmd160('item one'), function(err, item) {
+          source.get(utils.ripemd160('item one'), function(err, item) {
             expect(err).to.equal(null);
             item.shard.write(Buffer.from('item one'));
             item.shard.end();
-            source.get(utils.rmd160('item two'), function(err, item) {
+            source.get(utils.ripemd160('item two'), function(err, item) {
               item.shard.write(Buffer.from('item two'));
               item.shard.end();
               done();
@@ -81,14 +81,14 @@ describe('StorageMigration', function() {
     it('should successfully migrate the storage items', function(done) {
       var migration = new StorageMigration(source, target);
       migration.on('finish', function() {
-        target.get(utils.rmd160('item one'), function(err, item) {
+        target.get(utils.ripemd160('item one'), function(err, item) {
           expect(err).to.equal(null);
-          expect(item.hash).to.equal(utils.rmd160('item one'));
+          expect(item.hash).to.equal(utils.ripemd160('item one'));
           item.shard.once('data', function(data) {
             expect(data.toString()).to.equal('item one');
-            target.get(utils.rmd160('item two'), function(err, item) {
+            target.get(utils.ripemd160('item two'), function(err, item) {
               expect(err).to.equal(null);
-              expect(item.hash).to.equal(utils.rmd160('item two'));
+              expect(item.hash).to.equal(utils.ripemd160('item two'));
               item.shard.once('data', function(data) {
                 expect(data.toString()).to.equal('item two');
                 done();
@@ -176,7 +176,7 @@ describe('StorageMigration', function() {
       });
       var migration = new StorageMigration(source, target);
       var item = StorageItem({
-        hash: utils.rmd160('item three')
+        hash: utils.ripemd160('item three')
       });
       item.shard = {};
       migration._sourceStream = {
@@ -202,7 +202,7 @@ describe('StorageMigration', function() {
       );
       var migration = new StorageMigration(source, target);
       var item = StorageItem({
-        hash: utils.rmd160('item three')
+        hash: utils.ripemd160('item three')
       });
       item.shard = {};
       migration._sourceStream = {

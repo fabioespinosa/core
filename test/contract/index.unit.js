@@ -50,8 +50,8 @@ describe('Contract#diff', function() {
 
   it('should return an array of differing properties', function() {
     var diff = Contract.diff(
-      Contract({ data_hash: utils.rmd160('beep') }),
-      Contract({ data_hash: utils.rmd160('boop') })
+      Contract({ data_hash: utils.ripemd160('beep') }),
+      Contract({ data_hash: utils.ripemd160('boop') })
     );
     expect(diff).to.have.lengthOf(1);
     expect(diff[0]).to.equal('data_hash');

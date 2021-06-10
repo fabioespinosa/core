@@ -11,7 +11,7 @@ describe('OfferStream', function() {
 
   var keyPair = new KeyPair();
   var sampleContract = new Contract({
-    data_hash: utils.rmd160(''),
+    data_hash: utils.ripemd160(''),
     renter_id: keyPair.getNodeID()
   });
   sampleContract.sign('renter', keyPair.getPrivateKey());

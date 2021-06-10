@@ -33,14 +33,14 @@ describe('utils', function() {
 
   describe('#rmd160', function() {
     it('it will give digest as buffer', function() {
-      const digest = utils.rmd160b('hello, world', 'utf8');
+      const digest = utils.ripemd160b('hello, world', 'utf8');
       expect(Buffer.isBuffer(digest)).to.equal(true);
       expect(digest.toString('hex'))
         .to.equal('a3201f82fca034e46d10cd7b27e174976e241da2');
     });
 
     it('it will give digest as hex string', function() {
-      const digest = utils.rmd160('hello, world', 'utf8');
+      const digest = utils.ripemd160('hello, world', 'utf8');
       expect(digest).to.be.a('string');
       expect(digest)
         .to.equal('a3201f82fca034e46d10cd7b27e174976e241da2');
@@ -56,7 +56,7 @@ describe('utils', function() {
     });
 
     it('will give digest as hex string', function() {
-      const digest = utils.rmd160sha256('hello, world', 'utf8');
+      const digest = utils.ripemd160sha256('hello, world', 'utf8');
       expect(digest).to.be.a('string');
       expect(digest)
         .to.equal('cf7c332804ab8ae1df7d7cbe7517b82edb83c680');

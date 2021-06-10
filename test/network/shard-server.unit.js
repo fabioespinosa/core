@@ -54,7 +54,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       expect(server).to.be.instanceOf(ShardServer);
     });
@@ -68,7 +68,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       let contact = new storj.Contact({
         address: '127.0.0.1',
@@ -108,7 +108,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       let contact = new storj.Contact({
         address: '127.0.0.1',
@@ -156,7 +156,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.isAuthorized(null, null, (err) => {
         expect(err.message).to.equal('You did not supply a token');
@@ -168,7 +168,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.isAuthorized('token', null, (err) => {
         expect(err.message).to.equal('You did not supply the data hash');
@@ -180,7 +180,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.isAuthorized('token10', 'hash', (err) => {
         expect(err.message).to.equal('The supplied token is not accepted');
@@ -192,7 +192,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       let contact = new storj.Contact({
         address: '127.0.0.1',
@@ -213,7 +213,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       let contact = new storj.Contact({
         address: '127.0.0.1',
@@ -243,13 +243,13 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       var request = httpMocks.createRequest({
         method: 'POST',
         url: '/shards/hash',
         params: {
-          hash: utils.rmd160('data')
+          hash: utils.ripemd160('data')
         },
         query: {
           token: 'token'
@@ -274,12 +274,12 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       let contact = {
         address: '127.0.0.1',
         port: 4001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       server.accept('token', 'hash', contact, (err) => {
         if (err) {
@@ -334,7 +334,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.farmerInterface = {
         bridges: new Map(),
@@ -348,7 +348,7 @@ describe('ShardServer', function() {
       let contact = {
         address: '127.0.0.1',
         port: 3001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       server.accept('token', 'hash', contact, (err) => {
         if (err) {
@@ -405,7 +405,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.farmerInterface = {
         bridges: new Map(),
@@ -419,7 +419,7 @@ describe('ShardServer', function() {
       let contact = {
         address: '127.0.0.1',
         port: 3001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       server.accept('token', 'hash', contact, (err) => {
         if (err) {
@@ -475,7 +475,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.farmerInterface = {
         bridges: new Map(),
@@ -488,10 +488,10 @@ describe('ShardServer', function() {
       let contact = {
         address: '127.0.0.1',
         port: 3001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       let token = '2083494abc01';
-      let hash = utils.rmd160sha256('hello')
+      let hash = utils.ripemd160sha256('hello')
       server.accept(token, hash, contact, (err) => {
         if (err) {
           return done(err);
@@ -550,7 +550,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.farmerInterface = {
         bridges: new Map(),
@@ -563,10 +563,10 @@ describe('ShardServer', function() {
       let contact = {
         address: '127.0.0.1',
         port: 4001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       let token = '938af7147aea';
-      let hash = utils.rmd160sha256('hello');
+      let hash = utils.ripemd160sha256('hello');
       server.accept(token, hash, contact, (err) => {
         if (err) {
           return done(err);
@@ -626,7 +626,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.farmerInterface = {
         bridges: new Map(),
@@ -639,10 +639,10 @@ describe('ShardServer', function() {
       let contact = {
         address: '127.0.0.1',
         port: 4001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       let token = '15b6e35ded84';
-      let hash = utils.rmd160sha256('hello');
+      let hash = utils.ripemd160sha256('hello');
       server.accept(token, hash, contact, () => {
         var request = httpMocks.createRequest({
           method: 'POST',
@@ -678,13 +678,13 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       var request = httpMocks.createRequest({
         method: 'GET',
         url: '/shards/hash',
         params: {
-          hash: utils.rmd160('data')
+          hash: utils.ripemd160('data')
         },
         query: {
           token: 'token'
@@ -708,12 +708,12 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       let contact = {
         address: '127.0.0.1',
         port: 4001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       server.accept('token', 'hash', contact, () => {
         var request = httpMocks.createRequest({
@@ -758,7 +758,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160(''),
+        nodeID: utils.ripemd160(''),
         bridgeClient: {
           createExchangeReport: createExchangeReport
         }
@@ -837,7 +837,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: manager,
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       server.farmerInterface = {
         bridges: new Map(),
@@ -850,7 +850,7 @@ describe('ShardServer', function() {
       let contact = {
         address: '127.0.0.1',
         port: 4001,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       };
       server.accept('token', 'hash', contact, (err) => {
         if (err) {
@@ -894,7 +894,7 @@ describe('ShardServer', function() {
         storagePath: tmpPath,
         storageManager: Manager(RAMStorageAdapter()),
         logger: Logger(0),
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       clearInterval(server._reapDeadTokensInterval);
       let contact = {

@@ -596,7 +596,7 @@ describe('Network/Transport', function() {
       }, message, Contact({
         address: '0.0.0.0',
         port: 1234,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       }));
       expect(send.called).to.equal(true);
       done();
@@ -607,7 +607,7 @@ describe('Network/Transport', function() {
       var contact = Contact({
         address: '0.0.0.0',
         port: 1234,
-        nodeID: utils.rmd160('')
+        nodeID: utils.ripemd160('')
       });
       contact.valid = sinon.stub().returns(false);
       var receive = sinon.stub();
@@ -638,7 +638,7 @@ describe('Network/Transport', function() {
       }, message, Contact({
         address: '0.0.0.0',
         port: 1234,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }));
       expect(receive.calledWithMatch(null)).to.equal(true);
       done();
@@ -668,7 +668,7 @@ describe('Network/Transport', function() {
       }, message, Contact({
         address: '0.0.0.0',
         port: 1234,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }));
       expect(receive.calledWithMatch(null)).to.equal(true);
       done();
@@ -706,7 +706,7 @@ describe('Network/Transport', function() {
       }, message, Contact({
         address: '0.0.0.0',
         port: 1234,
-        nodeID: utils.rmd160('nodeid')
+        nodeID: utils.ripemd160('nodeid')
       }));
     });
 

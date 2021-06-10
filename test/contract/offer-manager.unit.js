@@ -11,7 +11,7 @@ describe('OfferManager', function() {
 
   var keyPair = new KeyPair();
   var sampleContract = new Contract({
-    data_hash: utils.rmd160(''),
+    data_hash: utils.ripemd160(''),
     renter_id: keyPair.getNodeID()
   });
   sampleContract.sign('renter', keyPair.getPrivateKey());
@@ -30,12 +30,12 @@ describe('OfferManager', function() {
       var offerManager = new OfferManager();
       var offerStream = new OfferStream(sampleContract);
       offerManager.addStream(offerStream);
-      expect(offerManager.getStream(utils.rmd160(''))).to.equal(offerStream);
+      expect(offerManager.getStream(utils.ripemd160(''))).to.equal(offerStream);
     });
 
     it('should return null of no stream', function() {
       var offerManager = new OfferManager();
-      expect(offerManager.getStream(utils.rmd160(''))).to.equal(null);
+      expect(offerManager.getStream(utils.ripemd160(''))).to.equal(null);
     });
 
   });
@@ -46,8 +46,8 @@ describe('OfferManager', function() {
       var offerManager = new OfferManager();
       var offerStream = new OfferStream(sampleContract);
       offerManager.addStream(offerStream);
-      offerManager.removeStream(utils.rmd160(''));
-      expect(offerManager.getStream(utils.rmd160(''))).to.equal(null);
+      offerManager.removeStream(utils.ripemd160(''));
+      expect(offerManager.getStream(utils.ripemd160(''))).to.equal(null);
     });
 
   });

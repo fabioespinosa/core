@@ -49,7 +49,7 @@ describe('RenterInterface', function() {
       });
       CLEANUP.push(renter);
       var contract = Contract({
-        data_hash: utils.rmd160(''),
+        data_hash: utils.ripemd160(''),
         renter_id: kp.getNodeID()
       });
       var publish = sinon.stub(renter, 'publish');
@@ -311,7 +311,7 @@ describe('RenterInterface', function() {
         renter.getConsignmentPointer(Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }), Contract({}), audit, function(err) {
           _send.restore();
           expect(err.message).to.equal('Send failed');
@@ -341,7 +341,7 @@ describe('RenterInterface', function() {
         renter.getConsignmentPointer(Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }), Contract({}), audit, function(err) {
           _send.restore();
           expect(err.message).to.equal('FAILED');
@@ -363,7 +363,7 @@ describe('RenterInterface', function() {
       var _send = sinon.stub(renter.transport, 'send').callsArgWith(
         2,
         null,
-        { result: { token: utils.rmd160('') } }
+        { result: { token: utils.ripemd160('') } }
       );
       var audit = new AuditStream(1);
       audit.end(Buffer.from('data'));
@@ -371,12 +371,12 @@ describe('RenterInterface', function() {
         renter.getConsignmentPointer(Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }), Contract({
-          data_hash: utils.rmd160('')
+          data_hash: utils.ripemd160('')
         }), audit, function(err, pointer) {
           _send.restore();
-          expect(pointer.token).to.equal(utils.rmd160(''));
+          expect(pointer.token).to.equal(utils.ripemd160(''));
           done();
         });
       });
@@ -403,7 +403,7 @@ describe('RenterInterface', function() {
       renter.getRetrievalPointer(Contact({
         address: '0.0.0.0',
         port: 0,
-        nodeID: utils.rmd160('contact')
+        nodeID: utils.ripemd160('contact')
       }), Contract({}), function(err) {
         _send.restore();
         expect(err.message).to.equal('Send failed');
@@ -429,7 +429,7 @@ describe('RenterInterface', function() {
       renter.getRetrievalPointer(Contact({
         address: '0.0.0.0',
         port: 0,
-        nodeID: utils.rmd160('contact')
+        nodeID: utils.ripemd160('contact')
       }), Contract({}), function(err) {
         _send.restore();
         expect(err.message).to.equal('FAILED');
@@ -450,18 +450,18 @@ describe('RenterInterface', function() {
       var _send = sinon.stub(renter.transport, 'send').callsArgWith(
         2,
         null,
-        { result: { token: utils.rmd160('') } }
+        { result: { token: utils.ripemd160('') } }
       );
       setImmediate(function() {
         renter.getRetrievalPointer(Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }), Contract({
-          data_hash: utils.rmd160('')
+          data_hash: utils.ripemd160('')
         }), function(err, pointer) {
           _send.restore();
-          expect(pointer.token).to.equal(utils.rmd160(''));
+          expect(pointer.token).to.equal(utils.ripemd160(''));
           done();
         });
       });
@@ -490,15 +490,15 @@ describe('RenterInterface', function() {
         farmer: Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }),
-        hash: utils.rmd160('hash'),
+        hash: utils.ripemd160('hash'),
         token: utils.generateToken(),
         operation: 'PULL'
       }], [Contact({
         address: '0.0.0.0',
         port: 0,
-        nodeID: utils.rmd160('contact')
+        nodeID: utils.ripemd160('contact')
       })], function(err) {
         expect(err).instanceOf(Error);
         expect(err.message).to.equal('All mirror requests failed');
@@ -525,15 +525,15 @@ describe('RenterInterface', function() {
         farmer: Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }),
-        hash: utils.rmd160('hash'),
+        hash: utils.ripemd160('hash'),
         token: utils.generateToken(),
         operation: 'PULL'
       }], [Contact({
         address: '0.0.0.0',
         port: 0,
-        nodeID: utils.rmd160('contact')
+        nodeID: utils.ripemd160('contact')
       })], function(err) {
         expect(err).instanceOf(Error);
         expect(err.message).to.equal('All mirror requests failed');
@@ -560,15 +560,15 @@ describe('RenterInterface', function() {
         farmer: Contact({
           address: '0.0.0.0',
           port: 0,
-          nodeID: utils.rmd160('contact')
+          nodeID: utils.ripemd160('contact')
         }),
-        hash: utils.rmd160('hash'),
+        hash: utils.ripemd160('hash'),
         token: utils.generateToken(),
         operation: 'PULL'
       }], [Contact({
         address: '0.0.0.0',
         port: 0,
-        nodeID: utils.rmd160('contact')
+        nodeID: utils.ripemd160('contact')
       })], function(err, results) {
         expect(results).to.lengthOf(1);
         done();

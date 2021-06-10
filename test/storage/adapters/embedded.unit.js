@@ -19,7 +19,7 @@ function tmpdir() {
 }
 
 var store = null;
-var hash = utils.rmd160('test');
+var hash = utils.ripemd160('test');
 var audit = new AuditStream(12);
 var contract = new Contract();
 var item = new StorageItem({

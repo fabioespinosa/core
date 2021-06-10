@@ -38,7 +38,7 @@ describe('StorageItem', function() {
       var contract = new Contract({
         renter_id: contact.nodeID,
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -61,7 +61,7 @@ describe('StorageItem', function() {
         renter_hd_index: 12,
         renter_id: contact.nodeID,
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -88,7 +88,7 @@ describe('StorageItem', function() {
         renter_hd_index: 12,
         renter_id: contact.nodeID,
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -108,7 +108,7 @@ describe('StorageItem', function() {
       var contract = new Contract({
         renter_id: contact.nodeID,
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -146,7 +146,7 @@ describe('StorageItem', function() {
         renter_hd_index: 12,
         renter_id: contact.nodeID,
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -165,7 +165,7 @@ describe('StorageItem', function() {
       var contract = new Contract({
         renter_id: contact.nodeID,
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -184,7 +184,7 @@ describe('StorageItem', function() {
       var contract = new Contract({
         renter_id: keyPair.getNodeID(),
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -217,7 +217,7 @@ describe('StorageItem', function() {
         renter_hd_index: 12,
         renter_id: keyPair.getNodeID(),
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
@@ -250,7 +250,7 @@ describe('StorageItem', function() {
         renter_hd_index: 12,
         renter_id: keyPair.getNodeID(),
         data_size: 1234,
-        data_hash: utils.rmd160sha256(''),
+        data_hash: utils.ripemd160sha256(''),
         store_begin: Date.now(),
         store_end: Date.now() + 10000,
         audit_count: 12
