@@ -61,6 +61,9 @@ exports.StorageMigration = require('./lib/storage/migration');
 /** {@link EmbeddedStorageAdapter} */
 exports.EmbeddedStorageAdapter = require('./lib/storage/adapters/embedded');
 
+/** {@link FileStorageAdapter} */
+exports.FileStorageAdapter = require('./lib/storage/adapters/fileStorage');
+
 /** {@link RAMStorageAdapter} */
 exports.RAMStorageAdapter = require('./lib/storage/adapters/ram');
 
