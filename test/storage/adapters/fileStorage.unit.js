@@ -19,8 +19,8 @@ var item = new StorageItem({
   shard: Buffer.from('test'),
 });
 
-describe('FileStorageAdapter', function() {
-  before(function() {
+describe('FileStorageAdapter', function () {
+  before(function () {
     if (utils.existsSync(TMP_DIR)) {
       rimraf.sync(TMP_DIR);
     }
@@ -29,15 +29,15 @@ describe('FileStorageAdapter', function() {
     store = new FileStorageAdapter(TMP_DIR);
   });
 
-  describe('@constructor', function() {
-    it('should create instance without the new keyword', function() {
+  describe('@constructor', function () {
+    it('should create instance without the new keyword', function () {
       expect(FileStorageAdapter(TMP_DIR)).to.be.instanceOf(FileStorageAdapter);
     });
   });
 
-  describe('#_validatePath', function() {
-    it('should not make a directory that already exists', function() {
-      expect(function() {
+  describe('#_validatePath', function () {
+    it('should not make a directory that already exists', function () {
+      expect(function () {
         var tmp = TMP_DIR;
         mkdirp.sync(tmp);
         FileStorageAdapter.prototype._validatePath(tmp);
@@ -45,10 +45,11 @@ describe('FileStorageAdapter', function() {
     });
   });
 
-  describe('#_put', function() {
-    it('should store the item', function(done) {
-      store._put(hash, item, function(err) {
-        fs.readFile(`${TMP_DIR}/${hash}`, function(err, file) {
+  describe('#_put', function () {
+    it('should store the item', function (done) {
+      store._put(hash, item, function (err) {
+        const contract_path = path.join(TMP_DIR, 'contracts', hash);
+        fs.readFile(contract_path, function (err, file) {
           expect(file).to.not.be.undefined;
         });
         expect(err).equal(null);
@@ -57,9 +58,9 @@ describe('FileStorageAdapter', function() {
     });
   });
 
-  describe('#_get', function() {
-    it('should return the stored item', function(done) {
-      store._get(hash, function(err, item) {
+  describe('#_get', function () {
+    it('should return the stored item', function (done) {
+      store._get(hash, function (err, item) {
         expect(err).to.equal(null);
         expect(item).to.be.instanceOf(Object);
         done();
@@ -67,16 +68,16 @@ describe('FileStorageAdapter', function() {
     });
   });
 
-  it('should return error if a hash that does not exist is retrieved', function(done) {
-    store._get('343243_a_hash_that_doesnt_exist', function(err) {
+  it('should return error if a hash that does not exist is retrieved', function (done) {
+    store._get('343243_a_hash_that_doesnt_exist', function (err) {
       expect(err.message).to.includes('ENOENT: no such file or directory');
       done();
     });
   });
 
-  describe('#_peek', function() {
-    it('should return the stored item', function(done) {
-      store._peek(hash, function(err, item) {
+  describe('#_peek', function () {
+    it('should return the stored item', function (done) {
+      store._peek(hash, function (err, item) {
         expect(err).to.equal(null);
         expect(item).to.be.instanceOf(Object);
         done();
@@ -84,10 +85,10 @@ describe('FileStorageAdapter', function() {
     });
   });
 
-  describe('#_keys', function() {
-    it('should stream all of the keys', function(done) {
+  describe('#_keys', function () {
+    it('should stream all of the keys', function (done) {
       var keyStream = store._keys();
-      keyStream.on('data', function(key) {
+      keyStream.on('data', function (key) {
         expect(key.toString()).to.equal(
           '5e52fee47e6b070565f74372468cdc699de89107'
         );
@@ -97,61 +98,66 @@ describe('FileStorageAdapter', function() {
     });
   });
 
-  describe('#_size', function() {
-    it('should return the size of the store on disk', function(done) {
-      store._size(null, function(err, shardSize) {
+  describe('#_size', function () {
+    it('should return the size of the store on disk', function (done) {
+      store._size(null, function (err, shardSize) {
         expect(shardSize).to.be.greaterThan(0);
         done();
       });
     });
 
-    it('should return the size of a single item', function(done) {
+    it('should return the size of a single item', function (done) {
       store._size(
         '5e52fee47e6b070565f74372468cdc699de89107',
-        function(err, shardSize) {
+        function (err, shardSize) {
           expect(shardSize).to.be.greaterThan(0);
           done();
         }
       );
     });
-    it('should return an error for a key that doesnt exist', function(done) {
-      store._size('sdfds_not_existing_key', function(err) {
+    it('should return an error for a key that doesnt exist', function (done) {
+      store._size('sdfds_not_existing_key', function (err) {
         expect(err.message).to.includes('ENOENT: no such file or directory');
         done();
       });
     });
   });
-  describe('#_del', function() {
-    it('should delete the shard if it exists', function(done) {
-      store._del(hash, function(err) {
+  describe('#_del', function () {
+    it('should delete the contract and shard if any of them exists', function (done) {
+      store._del(hash, function (err) {
         expect(err).to.equal(null);
-        fs.readFile(`${TMP_DIR}/${hash}`, (err) => {
+        const contract_path = path.join(TMP_DIR, 'contracts', hash);
+        const shard_path = path.join(TMP_DIR, 'shards', hash);
+        fs.readFile(contract_path, (err) => {
           expect(err.message).to.includes('ENOENT: no such file or directory');
+          fs.readFile(shard_path, (err) => {
+            expect(err.message).to.includes(
+              'ENOENT: no such file or directory'
+            );
+            done();
+          });
         });
-        done();
-      });
-    });
-
-    it('should return an error for a key that doesnt exist', function(done) {
-      store._del('sdfds_not_existing_key', function(err) {
-        expect(err.message).to.includes('ENOENT: no such file or directory');
-        done();
       });
     });
   });
 
-  describe('#_flush', function() {
-    it('delete all files after flush', function(done) {
-      store._flush(function() {
-        fs.readdir(TMP_DIR, (err, shards) => {
-          expect(shards.length).to.equal(0);
-          done();
+  describe('#_flush', function () {
+    it('delete all files after flush', function (done) {
+      store._flush(function () {
+        const contracts_path = path.join(TMP_DIR, 'contracts');
+        const shards_path = path.join(TMP_DIR, 'shards');
+        fs.readdir(contracts_path, (err, contracts) => {
+          expect(contracts.length).to.equal(0);
+          fs.readdir(shards_path, (err, shards) => {
+            expect(shards.length).to.equal(0);
+            done();
+          });
         });
       });
     });
   });
 });
 
-after(function() {
+after(function () {
   rimraf.sync(TMP_DIR);
 });
